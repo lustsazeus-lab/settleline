@@ -82,6 +82,7 @@ Expected:
 - 16 Vitest tests pass,
 - Next build includes `/`, `/market/[marketId]`, `/api/health`, `/api/fixtures`, `/api/markets/[marketId]/settle`, and `/api/markets/[marketId]/verify`.
 - submission verifier prints `PASS health`, `PASS settlement`, and `PASS verification`.
+- public GitHub repo runs the same audit, typecheck, test, and build steps via `.github/workflows/ci.yml`.
 
 ## What Is Intentionally Out of Scope
 

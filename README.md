@@ -33,10 +33,15 @@ curl -s -X POST http://127.0.0.1:3027/api/markets/market-wc-001-winner/verify
 ## Test
 
 ```bash
+npm audit --audit-level=moderate
 npm run typecheck
 npm run test
 npm run build
 ```
+
+## CI
+
+The GitHub Actions workflow in `.github/workflows/ci.yml` runs dependency audit, typecheck, tests, and production build on pushes to `main` and pull requests.
 
 ## Submission Verifier
 
