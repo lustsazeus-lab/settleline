@@ -27,6 +27,11 @@ npm run test
 npm run build
 ```
 
+## Review Aids
+
+- Demo video script: `docs/demo-video-script.md`
+- Local judge runbook: `docs/judge-runbook.md`
+
 ## TxLINE References
 
 - World Cup docs: `https://txline.txodds.com/documentation/worldcup`
