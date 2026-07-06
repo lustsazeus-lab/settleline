@@ -1,0 +1,63 @@
+{
+  "fixtures": [
+    {
+      "id": "wc-2026-demo-001",
+      "competition": "World Cup 2026",
+      "startsAt": "2026-07-12T19:00:00.000Z",
+      "status": "finished",
+      "homeTeam": {
+        "id": "arg",
+        "name": "Argentina",
+        "shortName": "ARG"
+      },
+      "awayTeam": {
+        "id": "fra",
+        "name": "France",
+        "shortName": "FRA"
+      },
+      "score": {
+        "home": 2,
+        "away": 1
+      }
+    }
+  ],
+  "markets": [
+    {
+      "id": "market-wc-001-winner",
+      "fixtureId": "wc-2026-demo-001",
+      "kind": "match-winner",
+      "label": "Match Winner",
+      "condition": "Settle to the team with the higher final score.",
+      "selections": ["ARG", "DRAW", "FRA"]
+    },
+    {
+      "id": "market-wc-001-total-goals",
+      "fixtureId": "wc-2026-demo-001",
+      "kind": "total-goals-over",
+      "label": "Total Goals Over 2.5",
+      "condition": "Settle to OVER when total final goals are greater than 2.5.",
+      "threshold": 2.5,
+      "selections": ["OVER", "UNDER"]
+    }
+  ],
+  "events": [
+    {
+      "id": "txline-replay-event-001",
+      "fixtureId": "wc-2026-demo-001",
+      "receivedAt": "2026-07-12T21:03:00.000Z",
+      "source": "txline-replay",
+      "serviceLevel": 1,
+      "status": "finished",
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "proof": {
+        "merkleRoot": "0x8a4f0f7e3f4fd2a0c7d9d6c39f01000000000000000000000000000000000001",
+        "signature": "0x6b9d2b4fdemo000000000000000000000000000000000000000000000000000001",
+        "slot": 392100001,
+        "programId": "6pW64gN1s2uqjHkn1unFeEjAwJkPGHoppGvS715wyP2J"
+      }
+    }
+  ]
+}
