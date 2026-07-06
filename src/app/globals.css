@@ -95,12 +95,13 @@ code {
 }
 
 .intro-panel,
-  .notice,
-  .market-card,
-  .receipt,
-  .verification,
-  .timeline,
-  .facts-panel {
+.notice,
+.market-card,
+.receipt,
+.verification,
+.timeline,
+.facts-panel,
+.judge-panel {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: rgba(255, 250, 240, 0.9);
@@ -186,6 +187,67 @@ code {
   margin: 0;
   color: #594615;
   line-height: 1.5;
+}
+
+.judge-panel {
+  margin-top: 16px;
+  padding: 18px;
+}
+
+.judge-panel-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.judge-panel-header h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.judge-panel-header span {
+  border-radius: 999px;
+  background: #dbf4ed;
+  color: #12604f;
+  font-family: var(--mono);
+  font-size: 12px;
+  padding: 7px 10px;
+}
+
+.judge-endpoint-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.judge-endpoint {
+  display: grid;
+  gap: 8px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-strong);
+  min-width: 0;
+  padding: 12px;
+}
+
+.judge-endpoint .method {
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.judge-endpoint code {
+  overflow-wrap: anywhere;
+  font-size: 12px;
+}
+
+.judge-endpoint small {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 12px;
 }
 
 .section {
@@ -392,7 +454,8 @@ code {
   .intro-grid,
   .market-grid,
   .detail-grid,
-  .verification ul {
+  .verification ul,
+  .judge-endpoint-grid {
     grid-template-columns: 1fr;
   }
 

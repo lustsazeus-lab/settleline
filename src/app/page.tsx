@@ -1,4 +1,5 @@
 import { ComplianceNotice } from "@/components/ComplianceNotice";
+import { JudgeApiPanel } from "@/components/JudgeApiPanel";
 import { MarketCard } from "@/components/MarketCard";
 import { getReplayFixtures, getReplayMarkets } from "@/domain/replay";
 
@@ -49,6 +50,7 @@ export default function HomePage() {
       </section>
 
       <ComplianceNotice />
+      <JudgeApiPanel />
 
       <section className="section" aria-labelledby="markets-title">
         <h2 className="section-title" id="markets-title">

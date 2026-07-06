@@ -25,6 +25,7 @@ The demo runs in replay mode so judges can test it without a wallet, token purch
 Screen:
 
 - Show the dashboard fact panel.
+- Show the `Judge API` panel.
 - Show the two market cards:
   - Match Winner
   - Total Goals Over 2.5

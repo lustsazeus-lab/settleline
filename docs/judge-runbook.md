@@ -21,7 +21,8 @@ http://127.0.0.1:3027
 1. Dashboard loads without login or wallet connection.
 2. Compliance notice says the app is a hackathon demo and does not enable real-money wagering.
 3. The dashboard shows two demo markets.
-4. Opening `Match Winner` shows:
+4. The dashboard shows a `Judge API` panel with health, settle, and verify endpoints.
+5. Opening `Match Winner` shows:
    - settlement timeline,
    - proof receipt,
    - deterministic `sha256:` receipt hash,
@@ -29,7 +30,7 @@ http://127.0.0.1:3027
    - reason `Argentina defeated France 2-1`,
    - Solana devnet program ID,
    - Merkle root.
-5. The same page shows `Verification Checks` with `Receipt verified`.
+6. The same page shows `Verification Checks` with `Receipt verified`.
 
 ## API Checks
 
@@ -77,7 +78,7 @@ Expected:
 
 - no audit vulnerabilities at moderate level or higher,
 - TypeScript exits cleanly,
-- 12 Vitest tests pass,
+- 13 Vitest tests pass,
 - Next build includes `/`, `/market/[marketId]`, `/api/health`, `/api/fixtures`, `/api/markets/[marketId]/settle`, and `/api/markets/[marketId]/verify`.
 
 ## What Is Intentionally Out of Scope
