@@ -38,6 +38,14 @@ npm run test
 npm run build
 ```
 
+## Submission Verifier
+
+```bash
+npm run verify:submission -- http://127.0.0.1:3027
+```
+
+Use the same command with a public deployment URL before submitting to Superteam.
+
 ## Review Aids
 
 - Demo video script: `docs/demo-video-script.md`

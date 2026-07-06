@@ -72,14 +72,16 @@ npm audit --audit-level=moderate
 npm run typecheck
 npm run test
 npm run build
+npm run verify:submission -- http://127.0.0.1:3027
 ```
 
 Expected:
 
 - no audit vulnerabilities at moderate level or higher,
 - TypeScript exits cleanly,
-- 13 Vitest tests pass,
+- 16 Vitest tests pass,
 - Next build includes `/`, `/market/[marketId]`, `/api/health`, `/api/fixtures`, `/api/markets/[marketId]/settle`, and `/api/markets/[marketId]/verify`.
+- submission verifier prints `PASS health`, `PASS settlement`, and `PASS verification`.
 
 ## What Is Intentionally Out of Scope
 

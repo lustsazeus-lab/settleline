@@ -72,6 +72,7 @@ Screen:
 - Show terminal commands:
 
 ```bash
+npm run verify:submission -- http://127.0.0.1:3027
 curl -s http://127.0.0.1:3027/api/health
 curl -s http://127.0.0.1:3027/api/fixtures
 curl -s -X POST http://127.0.0.1:3027/api/markets/market-wc-001-winner/settle
