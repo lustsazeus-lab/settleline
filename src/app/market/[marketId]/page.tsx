@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { ProofReceipt } from "@/components/ProofReceipt";
+import { ProofVerificationPanel } from "@/components/ProofVerificationPanel";
 import { SettlementTimeline } from "@/components/SettlementTimeline";
+import { verifyProofReceipt } from "@/domain/proofs";
 import { getLatestReplayEvent, getReplayFixtures, getReplayMarkets } from "@/domain/replay";
 import { replayAdapter } from "@/integrations/txline/replay-adapter";
 
@@ -34,6 +36,7 @@ export default async function MarketPage({ params }: { params: Promise<{ marketI
   }
 
   const receipt = await replayAdapter.settleMarket(market.id);
+  const verification = verifyProofReceipt(receipt, { market, event });
 
   return (
     <main className="shell">
@@ -48,6 +51,7 @@ export default async function MarketPage({ params }: { params: Promise<{ marketI
       <div className="detail-grid">
         <SettlementTimeline fixture={fixture} market={market} event={event} />
         <ProofReceipt receipt={receipt} />
+        <ProofVerificationPanel verification={verification} />
       </div>
     </main>
   );

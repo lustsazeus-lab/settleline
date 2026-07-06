@@ -95,11 +95,12 @@ code {
 }
 
 .intro-panel,
-.notice,
-.market-card,
-.receipt,
-.timeline,
-.facts-panel {
+  .notice,
+  .market-card,
+  .receipt,
+  .verification,
+  .timeline,
+  .facts-panel {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: rgba(255, 250, 240, 0.9);
@@ -264,7 +265,8 @@ code {
 }
 
 .timeline,
-.receipt {
+.receipt,
+.verification {
   padding: 20px;
 }
 
@@ -296,6 +298,72 @@ code {
   font-size: 13px;
 }
 
+.verification {
+  grid-column: 1 / -1;
+}
+
+.verification-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.verification-header h2 {
+  margin: 0;
+}
+
+.verification-badge {
+  border-radius: 999px;
+  font-family: var(--mono);
+  font-size: 12px;
+  padding: 7px 10px;
+}
+
+.verification-badge.valid {
+  background: #dbf4ed;
+  color: #12604f;
+}
+
+.verification-badge.invalid {
+  background: #f6dddd;
+  color: var(--danger);
+}
+
+.verification ul {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.verification li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-strong);
+  min-height: 48px;
+  padding: 10px 12px;
+}
+
+.verification li span {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.verification li strong {
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
 .winner {
   color: var(--accent);
   font-size: 20px;
@@ -323,7 +391,8 @@ code {
   .topbar,
   .intro-grid,
   .market-grid,
-  .detail-grid {
+  .detail-grid,
+  .verification ul {
     grid-template-columns: 1fr;
   }
 

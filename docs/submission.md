@@ -6,7 +6,7 @@ SettleLine
 
 ## Brief Explanation
 
-SettleLine is a verifiable World Cup prediction settlement dashboard built on top of TxLINE-shaped data. It shows how match updates can drive deterministic market resolution, produce a transparent proof receipt, and demonstrate devnet/mock escrow settlement without requiring real-money wagering.
+SettleLine is a verifiable World Cup prediction settlement dashboard built on top of TxLINE-shaped data. It shows how match updates can drive deterministic market resolution, produce a transparent proof receipt, verify that receipt against market/event/proof metadata, and demonstrate devnet/mock escrow settlement without requiring real-money wagering.
 
 ## TxLINE API Experience
 

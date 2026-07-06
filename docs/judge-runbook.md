@@ -28,12 +28,14 @@ http://127.0.0.1:3027
    - reason `Argentina defeated France 2-1`,
    - Solana devnet program ID,
    - Merkle root.
+5. The same page shows `Verification Checks` with `Receipt verified`.
 
 ## API Checks
 
 ```bash
 curl -s http://127.0.0.1:3027/api/fixtures
 curl -s -X POST http://127.0.0.1:3027/api/markets/market-wc-001-winner/settle
+curl -s -X POST http://127.0.0.1:3027/api/markets/market-wc-001-winner/verify
 ```
 
 Expected settlement receipt id:
@@ -46,6 +48,12 @@ Expected winning selection:
 
 ```text
 ARG
+```
+
+Expected verification status:
+
+```text
+"valid":true
 ```
 
 ## Verification Commands
@@ -61,8 +69,8 @@ Expected:
 
 - no audit vulnerabilities at moderate level or higher,
 - TypeScript exits cleanly,
-- 5 Vitest tests pass,
-- Next build includes `/`, `/market/[marketId]`, `/api/fixtures`, and `/api/markets/[marketId]/settle`.
+- 9 Vitest tests pass,
+- Next build includes `/`, `/market/[marketId]`, `/api/fixtures`, `/api/markets/[marketId]/settle`, and `/api/markets/[marketId]/verify`.
 
 ## What Is Intentionally Out of Scope
 

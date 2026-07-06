@@ -7,6 +7,7 @@ SettleLine is a TxODDS World Cup hackathon MVP showing verifiable prediction-mar
 - TxLINE-shaped fixture and event ingestion.
 - Deterministic market resolution.
 - Proof receipts with Solana program metadata.
+- Receipt verification checks for market, fixture, event, proof metadata, and winning selection.
 - No-wallet judge mode.
 - Compliance-safe devnet/replay behavior without real-money wagering.
 
@@ -14,10 +15,18 @@ SettleLine is a TxODDS World Cup hackathon MVP showing verifiable prediction-mar
 
 ```bash
 npm install
-npm run dev
+npm run dev -- --hostname 127.0.0.1 --port 3027
 ```
 
-Open `http://localhost:3000`.
+Open `http://127.0.0.1:3027`.
+
+## Replay APIs
+
+```bash
+curl -s http://127.0.0.1:3027/api/fixtures
+curl -s -X POST http://127.0.0.1:3027/api/markets/market-wc-001-winner/settle
+curl -s -X POST http://127.0.0.1:3027/api/markets/market-wc-001-winner/verify
+```
 
 ## Test
 

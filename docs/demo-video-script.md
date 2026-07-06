@@ -57,6 +57,7 @@ Screen:
   - program ID,
   - slot,
   - Merkle root.
+  - `Verification Checks` / `Receipt verified`.
 
 ## 2:35-3:15 - API Check
 
@@ -71,9 +72,10 @@ Screen:
 ```bash
 curl -s http://127.0.0.1:3027/api/fixtures
 curl -s -X POST http://127.0.0.1:3027/api/markets/market-wc-001-winner/settle
+curl -s -X POST http://127.0.0.1:3027/api/markets/market-wc-001-winner/verify
 ```
 
-- Show receipt JSON.
+- Show receipt JSON and verification JSON.
 
 ## 3:15-3:55 - TxLINE Feedback and Extension Path
 
