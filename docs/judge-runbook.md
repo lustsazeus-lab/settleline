@@ -18,6 +18,8 @@ http://127.0.0.1:3027
 
 ## What to Check
 
+Reference technical documentation: `docs/architecture.md`.
+
 1. Dashboard loads without login or wallet connection.
 2. Compliance notice says the app is a hackathon demo and does not enable real-money wagering.
 3. The dashboard shows two demo markets.

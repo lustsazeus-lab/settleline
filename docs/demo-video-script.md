@@ -92,6 +92,7 @@ Next, SettleLine can swap the replay adapter for a live TxLINE SSE adapter, then
 Screen:
 
 - Show README TxLINE references.
+- Show `docs/architecture.md`.
 - Show adapter files:
   - `src/integrations/txline/replay-adapter.ts`
   - `src/integrations/txline/http-adapter.ts`
