@@ -65,3 +65,20 @@ export type ProofReceipt = {
   eventId: string;
   proof: TxLineReplayEvent["proof"];
 };
+
+export type MockEscrowSettlement = {
+  escrowId: string;
+  marketId: string;
+  receiptHash: string;
+  status: "settled";
+  network: "solana-devnet-mock";
+  asset: "demo-usdt-accounting-units";
+  instruction: "release-to-winning-selection";
+  winningSelection: string;
+  payouts: Array<{
+    selection: string;
+    destination: string;
+    amount: string;
+  }>;
+  safeguards: Array<"replay-only" | "no-custody" | "no-real-money-wagering">;
+};

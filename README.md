@@ -8,6 +8,7 @@ SettleLine is a TxODDS World Cup hackathon MVP showing verifiable prediction-mar
 - Deterministic market resolution.
 - Proof receipts with deterministic SHA-256 hashes and Solana program metadata.
 - Receipt verification checks for market, fixture, event, proof metadata, and winning selection.
+- Replay-only mock escrow release mapping for the winning selection.
 - Judge-facing API panel for health, settlement, and verification checks.
 - No-wallet judge mode.
 - Compliance-safe devnet/replay behavior without real-money wagering.
@@ -57,7 +58,7 @@ Use the same command with a public deployment URL before submitting to Superteam
 npm run evidence:bundle -- http://127.0.0.1:3027
 ```
 
-This prints a JSON bundle with the replay health response, deterministic receipt, receipt hash, verification checks, and copyable judge commands. Use the same command with a public deployment URL after deployment.
+This prints a JSON bundle with the replay health response, deterministic receipt, mock escrow release, receipt hash, verification checks, and copyable judge commands. Use the same command with a public deployment URL after deployment.
 
 ## Review Aids
 

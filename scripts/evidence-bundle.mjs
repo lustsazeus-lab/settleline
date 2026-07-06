@@ -21,6 +21,7 @@ export async function buildEvidenceBundle(
     marketId,
     health,
     receipt: settlement.receipt,
+    mockEscrow: settlement.mockEscrow,
     verification: verification.verification,
     judgeCommands: [
       `curl -s ${origin}/api/health`,

@@ -28,6 +28,7 @@ Reference technical documentation: `docs/architecture.md`.
    - settlement timeline,
    - proof receipt,
    - deterministic `sha256:` receipt hash,
+   - mock escrow settlement,
    - winning selection `ARG`,
    - reason `Argentina defeated France 2-1`,
    - Solana devnet program ID,
@@ -61,6 +62,12 @@ Expected winning selection:
 ARG
 ```
 
+Expected mock escrow id:
+
+```text
+mock-escrow-market-wc-001-winner-txline-replay-event-001
+```
+
 Expected verification status:
 
 ```text
@@ -82,10 +89,10 @@ Expected:
 
 - no audit vulnerabilities at moderate level or higher,
 - TypeScript exits cleanly,
-- 18 Vitest tests pass,
+- 22 Vitest tests pass,
 - Next build includes `/`, `/market/[marketId]`, `/api/health`, `/api/fixtures`, `/api/markets/[marketId]/settle`, and `/api/markets/[marketId]/verify`.
 - submission verifier prints `PASS health`, `PASS settlement`, and `PASS verification`.
-- evidence bundle prints health, receipt, receipt hash, verification checks, and copyable judge commands as JSON.
+- evidence bundle prints health, receipt, mock escrow release, receipt hash, verification checks, and copyable judge commands as JSON.
 - public GitHub repo runs the same audit, typecheck, test, and build steps via `.github/workflows/ci.yml`.
 
 ## What Is Intentionally Out of Scope

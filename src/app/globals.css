@@ -98,6 +98,7 @@ code {
 .notice,
 .market-card,
 .receipt,
+.escrow,
 .verification,
 .timeline,
 .facts-panel,
@@ -178,6 +179,7 @@ code {
 .section-title,
 .market-card h2,
 .receipt h2,
+.escrow h2,
 .timeline h2 {
   display: block;
   margin: 0 0 8px;
@@ -328,6 +330,7 @@ code {
 
 .timeline,
 .receipt,
+.escrow,
 .verification {
   padding: 20px;
 }
@@ -342,22 +345,59 @@ code {
   line-height: 1.5;
 }
 
-.receipt dl {
+.receipt dl,
+.escrow dl {
   display: grid;
   grid-template-columns: minmax(120px, 0.3fr) minmax(0, 0.7fr);
   gap: 10px 16px;
   margin: 0;
 }
 
-.receipt dt {
+.receipt dt,
+.escrow dt {
   font-size: 13px;
 }
 
-.receipt dd {
+.receipt dd,
+.escrow dd {
   margin: 0;
   overflow-wrap: anywhere;
   font-family: var(--mono);
   font-size: 13px;
+}
+
+.escrow-payouts {
+  display: grid;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.escrow-payout {
+  display: grid;
+  grid-template-columns: minmax(42px, 0.4fr) minmax(60px, 0.4fr) minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-strong);
+  padding: 10px 12px;
+}
+
+.escrow-payout span,
+.escrow-safeguards {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.escrow-payout strong,
+.escrow-payout code {
+  font-family: var(--mono);
+  font-size: 12px;
+}
+
+.escrow-safeguards {
+  margin: 14px 0 0;
+  overflow-wrap: anywhere;
 }
 
 .verification {
@@ -468,7 +508,9 @@ code {
     font-size: 44px;
   }
 
-  .receipt dl {
+  .receipt dl,
+  .escrow dl,
+  .escrow-payout {
     grid-template-columns: 1fr;
   }
 }

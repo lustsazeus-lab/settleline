@@ -17,6 +17,7 @@ TxLINE-shaped replay event
   -> fixture and market lookup
   -> deterministic settlement rule
   -> proof receipt
+  -> replay-only mock escrow release
   -> receipt verification checks
   -> dashboard and JSON APIs
 ```
@@ -26,6 +27,7 @@ Core files:
 - `src/data/worldcup-replay.json`: replay fixtures, markets, and TxLINE-shaped event proof metadata.
 - `src/domain/replay.ts`: read-only replay data access.
 - `src/domain/settlement.ts`: deterministic rule engine.
+- `src/domain/escrow.ts`: deterministic replay-only mock escrow release mapping.
 - `src/domain/proofs.ts`: receipt construction, stable SHA-256 hash, and verification checks.
 - `src/integrations/txline/replay-adapter.ts`: adapter used by pages and API routes.
 - `src/integrations/txline/http-adapter.ts`: guarded placeholder for future live TxLINE activation.
@@ -60,6 +62,18 @@ A proof receipt binds:
 
 The receipt hash is a `sha256:` digest over a stable, sorted JSON representation of the receipt payload excluding `receiptHash` itself. This makes local tampering visible without requiring judges to run a wallet or sign a transaction.
 
+## Mock Escrow Settlement
+
+`buildMockEscrowSettlement` maps a verified proof receipt to a replay-only settlement instruction:
+
+- `network`: `solana-devnet-mock`,
+- `asset`: `demo-usdt-accounting-units`,
+- `instruction`: `release-to-winning-selection`,
+- payout destination: deterministic demo vault for the winning selection,
+- safeguards: `replay-only`, `no-custody`, and `no-real-money-wagering`.
+
+This is an accounting proof for judges, not a live payment rail. It shows the exact point where a compliant devnet or production escrow program would release funds after receipt verification succeeds.
+
 ## Verification Checks
 
 `verifyProofReceipt` returns a structured result with one boolean per check:
@@ -91,6 +105,7 @@ Use the submission verifier for an end-to-end check:
 
 ```bash
 npm run verify:submission -- http://127.0.0.1:3027
+npm run evidence:bundle -- http://127.0.0.1:3027
 ```
 
 Expected output:
@@ -100,6 +115,8 @@ PASS health
 PASS settlement
 PASS verification
 ```
+
+The evidence bundle also includes the proof receipt and mock escrow release JSON.
 
 ## Live TxLINE Extension Path
 

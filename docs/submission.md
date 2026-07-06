@@ -86,6 +86,7 @@ The evidence bundle command prints JSON containing:
 
 - deployment health and replay/no-real-money status,
 - deterministic proof receipt,
+- replay-only mock escrow release,
 - SHA-256 receipt hash,
 - receipt verification checks,
 - copyable judge commands.
@@ -117,6 +118,7 @@ SettleLine does not:
 - [ ] GitHub Actions CI is visible and passing.
 - [ ] `docs/architecture.md` is reachable in the public repo.
 - [ ] `npm run verify:submission -- <public-url>` passes.
+- [ ] `npm run evidence:bundle -- <public-url>` includes mock escrow release and `valid: true`.
 - [ ] Demo video is public and under 5 minutes.
 - [ ] User confirms they are the real participant/owner.
 - [ ] User confirms Superteam submission action.

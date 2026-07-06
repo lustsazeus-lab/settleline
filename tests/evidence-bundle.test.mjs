@@ -31,6 +31,12 @@ describe("buildEvidenceBundle", () => {
             eventId: "txline-replay-event-001",
             outcome: { winningSelection: "ARG" },
           },
+          mockEscrow: {
+            escrowId: "mock-escrow-market-wc-001-winner-txline-replay-event-001",
+            network: "solana-devnet-mock",
+            asset: "demo-usdt-accounting-units",
+            winningSelection: "ARG",
+          },
         });
       }
 
@@ -66,6 +72,12 @@ describe("buildEvidenceBundle", () => {
         fixtureId: "fixture-wc-final-2026",
         eventId: "txline-replay-event-001",
         outcome: { winningSelection: "ARG" },
+      },
+      mockEscrow: {
+        escrowId: "mock-escrow-market-wc-001-winner-txline-replay-event-001",
+        network: "solana-devnet-mock",
+        asset: "demo-usdt-accounting-units",
+        winningSelection: "ARG",
       },
       verification: {
         valid: true,
