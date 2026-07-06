@@ -1,6 +1,6 @@
 # SettleLine
 
-SettleLine is a TxODDS World Cup hackathon MVP showing verifiable prediction-market settlement using TxLINE-shaped match data.
+SettleLine is a TxODDS World Cup hackathon MVP showing verifiable prediction-market settlement and trading-agent risk signals using TxLINE-shaped match data.
 
 Live MVP: https://settleline.vercel.app
 
@@ -15,7 +15,8 @@ Demo video: https://github.com/lustsazeus-lab/settleline/releases/download/settl
 - Proof receipts with deterministic SHA-256 hashes and Solana program metadata.
 - Receipt verification checks for market, fixture, event, proof metadata, and winning selection.
 - Replay-only mock escrow release mapping for the winning selection.
-- Judge-facing API panel for health, settlement, and verification checks.
+- LineSignal trading-agent summaries that classify settlement readiness, confidence, proof slot, and risk reasons before mock escrow release.
+- Judge-facing API panel for health, settlement, verification, and signal checks.
 - No-wallet judge mode.
 - Compliance-safe devnet/replay behavior without real-money wagering.
 
@@ -33,6 +34,7 @@ Open `http://127.0.0.1:3027`.
 ```bash
 curl -s http://127.0.0.1:3027/api/health
 curl -s http://127.0.0.1:3027/api/fixtures
+curl -s http://127.0.0.1:3027/api/signals
 curl -s -X POST http://127.0.0.1:3027/api/markets/market-wc-001-winner/settle
 curl -s -X POST http://127.0.0.1:3027/api/markets/market-wc-001-winner/verify
 ```

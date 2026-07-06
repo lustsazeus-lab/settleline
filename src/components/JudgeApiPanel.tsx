@@ -14,6 +14,11 @@ const judgeEndpoints = [
     path: "/api/markets/market-wc-001-winner/verify",
     signal: "valid: true",
   },
+  {
+    method: "GET",
+    path: "/api/signals",
+    signal: "riskLevel: medium",
+  },
 ];
 
 export function JudgeApiPanel() {

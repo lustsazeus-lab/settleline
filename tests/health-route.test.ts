@@ -19,6 +19,7 @@ describe("GET /api/health", () => {
       },
       routes: [
         "/api/fixtures",
+        "/api/signals",
         "/api/markets/[marketId]/settle",
         "/api/markets/[marketId]/verify",
       ],

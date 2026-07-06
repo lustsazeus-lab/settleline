@@ -101,8 +101,9 @@ code {
 .escrow,
 .verification,
 .timeline,
-.facts-panel,
-.judge-panel {
+  .facts-panel,
+  .judge-panel,
+  .line-signal-panel {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: rgba(255, 250, 240, 0.9);
@@ -196,7 +197,8 @@ code {
   padding: 18px;
 }
 
-.judge-panel-header {
+.judge-panel-header,
+.line-signal-header {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -204,12 +206,14 @@ code {
   margin-bottom: 14px;
 }
 
-.judge-panel-header h2 {
+.judge-panel-header h2,
+.line-signal-header h2 {
   margin: 0;
   font-size: 22px;
 }
 
-.judge-panel-header span {
+.judge-panel-header span,
+.line-signal-header span {
   border-radius: 999px;
   background: #dbf4ed;
   color: #12604f;
@@ -250,6 +254,104 @@ code {
   color: var(--muted);
   font-family: var(--mono);
   font-size: 12px;
+}
+
+.line-signal-panel {
+  margin-top: 16px;
+  padding: 18px;
+}
+
+.signal-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.signal-card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-strong);
+  min-width: 0;
+  padding: 16px;
+}
+
+.signal-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.signal-card h3 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.risk-badge {
+  border-radius: 999px;
+  font-family: var(--mono);
+  font-size: 12px;
+  padding: 7px 10px;
+  text-transform: uppercase;
+}
+
+.risk-badge.low {
+  background: #dbf4ed;
+  color: #12604f;
+}
+
+.risk-badge.medium {
+  background: #fff3ce;
+  color: #725817;
+}
+
+.risk-badge.high {
+  background: #f6dddd;
+  color: var(--danger);
+}
+
+.signal-summary,
+.agent-action,
+.risk-list {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.signal-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 14px 0;
+}
+
+.signal-metrics div {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.signal-metrics dt {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.signal-metrics dd {
+  margin: 6px 0 0;
+  overflow-wrap: anywhere;
+  font-family: var(--mono);
+  font-size: 12px;
+}
+
+.agent-action {
+  margin: 0 0 10px;
+  font-weight: 700;
+}
+
+.risk-list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding-left: 18px;
 }
 
 .section {
@@ -495,7 +597,9 @@ code {
   .market-grid,
   .detail-grid,
   .verification ul,
-  .judge-endpoint-grid {
+  .judge-endpoint-grid,
+  .signal-grid,
+  .signal-metrics {
     grid-template-columns: 1fr;
   }
 

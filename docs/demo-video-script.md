@@ -20,12 +20,13 @@ Screen:
 
 Voiceover:
 
-The demo runs in replay mode so judges can test it without a wallet, token purchase, subscription, or login. The fixture and event payloads are shaped around the TxLINE World Cup flow, including service level, program ID, slot, signature, and Merkle root metadata.
+The demo runs in replay mode so judges can test it without a wallet, token purchase, subscription, or login. The fixture and event payloads are shaped around the TxLINE World Cup flow, including service level, program ID, slot, signature, and Merkle root metadata. The same data now powers LineSignal, a trading-agent review layer that explains settlement readiness, confidence, proof slot, and risk reasons without placing trades.
 
 Screen:
 
 - Show the dashboard fact panel.
 - Show the `Judge API` panel.
+- Show the `LineSignal` panel.
 - Show the two market cards:
   - Match Winner
   - Total Goals Over 2.5
@@ -65,7 +66,7 @@ Screen:
 
 Voiceover:
 
-The same flow is available through simple API routes. Judges can inspect fixtures, settlement output, and verification checks directly, which makes the demo easy to test even without interacting with the browser UI.
+The same flow is available through simple API routes. Judges can inspect fixtures, LineSignal output, settlement output, and verification checks directly, which makes the demo easy to test even without interacting with the browser UI.
 
 Screen:
 
@@ -75,11 +76,12 @@ Screen:
 npm run verify:submission -- https://settleline.vercel.app
 curl -s https://settleline.vercel.app/api/health
 curl -s https://settleline.vercel.app/api/fixtures
+curl -s https://settleline.vercel.app/api/signals
 curl -s -X POST https://settleline.vercel.app/api/markets/market-wc-001-winner/settle
 curl -s -X POST https://settleline.vercel.app/api/markets/market-wc-001-winner/verify
 ```
 
-- Show health JSON, receipt JSON, and verification JSON.
+- Show health JSON, LineSignal JSON, receipt JSON, and verification JSON.
 
 ## 3:15-3:55 - TxLINE Feedback and Extension Path
 

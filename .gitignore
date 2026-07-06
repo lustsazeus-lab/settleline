@@ -8,3 +8,5 @@ output/
 .env*
 !.env.example
 .vercel
+.codegraph/
+.playwright-cli/

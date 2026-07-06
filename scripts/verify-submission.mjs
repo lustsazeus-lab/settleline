@@ -10,6 +10,7 @@ export async function verifySubmissionTarget(baseUrl, fetcher = fetch) {
     await checkHealth(origin, fetcher),
     await checkSettlement(origin, fetcher),
     await checkVerification(origin, fetcher),
+    await checkSignals(origin, fetcher),
   ];
 
   return {
@@ -46,6 +47,23 @@ async function checkVerification(origin, fetcher) {
   return {
     label: "verification",
     passed: body.verification?.valid === true,
+  };
+}
+
+async function checkSignals(origin, fetcher) {
+  const body = await readJson(fetcher(`${origin}/api/signals`));
+
+  return {
+    label: "signals",
+    passed:
+      body.track === "Trading Tools and Agents" &&
+      Array.isArray(body.signals) &&
+      body.signals.some(
+        (signal) =>
+          signal.marketId === MARKET_ID &&
+          signal.workflowStatus === "settlement-ready" &&
+          ["low", "medium", "high"].includes(signal.riskLevel),
+      ),
   };
 }
 

@@ -17,7 +17,7 @@ function jsonResponse(body) {
 }
 
 describe("verifySubmissionTarget", () => {
-  it("checks the health, settle, and verify endpoints for a deployment URL", async () => {
+  it("checks the health, settle, verify, and signals endpoints for a deployment URL", async () => {
     const calls = [];
     const fetcher = async (url, init = {}) => {
       calls.push({ url, method: init.method ?? "GET" });
@@ -39,6 +39,13 @@ describe("verifySubmissionTarget", () => {
         return jsonResponse({ verification: { valid: true } });
       }
 
+      if (url.endsWith("/api/signals")) {
+        return jsonResponse({
+          track: "Trading Tools and Agents",
+          signals: [{ marketId: "market-wc-001-winner", workflowStatus: "settlement-ready", riskLevel: "medium" }],
+        });
+      }
+
       throw new Error(`Unexpected URL ${url}`);
     };
 
@@ -48,12 +55,14 @@ describe("verifySubmissionTarget", () => {
         { label: "health", passed: true },
         { label: "settlement", passed: true },
         { label: "verification", passed: true },
+        { label: "signals", passed: true },
       ],
     });
     expect(calls).toEqual([
       { url: "https://settleline.example/api/health", method: "GET" },
       { url: "https://settleline.example/api/markets/market-wc-001-winner/settle", method: "POST" },
       { url: "https://settleline.example/api/markets/market-wc-001-winner/verify", method: "POST" },
+      { url: "https://settleline.example/api/signals", method: "GET" },
     ]);
   });
 
@@ -81,6 +90,7 @@ describe("verifySubmissionTarget", () => {
         { label: "health", passed: true },
         { label: "settlement", passed: true },
         { label: "verification", passed: false },
+        { label: "signals", passed: false },
       ],
     });
   });
@@ -106,6 +116,16 @@ describe("verifySubmissionTarget", () => {
         return;
       }
 
+      if (request.url === "/api/signals") {
+        response.end(
+          JSON.stringify({
+            track: "Trading Tools and Agents",
+            signals: [{ marketId: "market-wc-001-winner", workflowStatus: "settlement-ready", riskLevel: "medium" }],
+          }),
+        );
+        return;
+      }
+
       response.end(JSON.stringify({ verification: { valid: true } }));
     });
 
@@ -121,6 +141,7 @@ describe("verifySubmissionTarget", () => {
       expect(stdout).toContain("PASS health");
       expect(stdout).toContain("PASS settlement");
       expect(stdout).toContain("PASS verification");
+      expect(stdout).toContain("PASS signals");
     } finally {
       await new Promise((resolve, reject) => server.close((error) => (error ? reject(error) : resolve())));
     }

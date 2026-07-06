@@ -14,9 +14,9 @@ SettleLine
 
 ## Brief Explanation
 
-SettleLine is a verifiable World Cup prediction settlement dashboard built on top of TxLINE-shaped data. It shows how live or replayed TxLINE match updates can drive deterministic market resolution, produce a transparent proof receipt with a deterministic SHA-256 hash, verify that receipt against market/event/proof metadata, and trigger a devnet/mock escrow settlement flow without requiring real-money wagering.
+SettleLine is a verifiable World Cup prediction settlement and trading-agent dashboard built on top of TxLINE-shaped data. It shows how live or replayed TxLINE match updates can drive deterministic market resolution, produce a transparent proof receipt with a deterministic SHA-256 hash, verify that receipt against market/event/proof metadata, generate LineSignal risk summaries for agent review, and trigger a devnet/mock escrow settlement flow without requiring real-money wagering.
 
-The project focuses on the settlement layer rather than gambling UX: judges can open the app without a wallet, inspect the fixture state, review the settlement condition, replay the TxLINE-shaped score event, verify the hashed receipt checks, and see how the final result maps to a proof-backed payout decision.
+The project focuses on the settlement and pre-release review layer rather than gambling UX: judges can open the app without a wallet, inspect the fixture state, review the settlement condition, replay the TxLINE-shaped score event, inspect LineSignal readiness/risk cards, verify the hashed receipt checks, and see how the final result maps to a proof-backed payout decision.
 
 ## Live MVP Link
 
@@ -101,6 +101,7 @@ Expected verifier output:
 PASS health
 PASS settlement
 PASS verification
+PASS signals
 ```
 
 The evidence bundle command prints JSON containing:
@@ -110,6 +111,7 @@ The evidence bundle command prints JSON containing:
 - replay-only mock escrow release,
 - SHA-256 receipt hash,
 - receipt verification checks,
+- LineSignal Trading Tools and Agents output,
 - copyable judge commands.
 
 The readiness command prints a Markdown packet containing copyable Superteam form fields, evidence summary, judge commands, and the remaining gates.

@@ -12,7 +12,7 @@ function jsonResponse(body) {
 }
 
 describe("buildEvidenceBundle", () => {
-  it("collects judge evidence from health, settlement, and verification endpoints", async () => {
+  it("collects judge evidence from health, settlement, verification, and signals endpoints", async () => {
     const calls = [];
     const fetcher = async (url, init = {}) => {
       calls.push({ url, method: init.method ?? "GET" });
@@ -52,6 +52,13 @@ describe("buildEvidenceBundle", () => {
         });
       }
 
+      if (url.endsWith("/api/signals")) {
+        return jsonResponse({
+          track: "Trading Tools and Agents",
+          signals: [{ marketId: "market-wc-001-winner", workflowStatus: "settlement-ready", riskLevel: "medium" }],
+        });
+      }
+
       throw new Error(`Unexpected URL ${url}`);
     };
 
@@ -86,10 +93,15 @@ describe("buildEvidenceBundle", () => {
           { label: "Receipt hash", passed: true },
         ],
       },
+      signals: {
+        track: "Trading Tools and Agents",
+        signals: [{ marketId: "market-wc-001-winner", workflowStatus: "settlement-ready", riskLevel: "medium" }],
+      },
       judgeCommands: [
         "curl -s https://settleline.example/api/health",
         "curl -s -X POST https://settleline.example/api/markets/market-wc-001-winner/settle",
         "curl -s -X POST https://settleline.example/api/markets/market-wc-001-winner/verify",
+        "curl -s https://settleline.example/api/signals",
         "npm run verify:submission -- https://settleline.example",
       ],
     });
@@ -98,6 +110,7 @@ describe("buildEvidenceBundle", () => {
       { url: "https://settleline.example/api/health", method: "GET" },
       { url: "https://settleline.example/api/markets/market-wc-001-winner/settle", method: "POST" },
       { url: "https://settleline.example/api/markets/market-wc-001-winner/verify", method: "POST" },
+      { url: "https://settleline.example/api/signals", method: "GET" },
     ]);
   });
 

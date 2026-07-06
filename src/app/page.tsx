@@ -1,11 +1,14 @@
 import { ComplianceNotice } from "@/components/ComplianceNotice";
 import { JudgeApiPanel } from "@/components/JudgeApiPanel";
+import { LineSignalPanel } from "@/components/LineSignalPanel";
 import { MarketCard } from "@/components/MarketCard";
-import { getReplayFixtures, getReplayMarkets } from "@/domain/replay";
+import { getReplayEvents, getReplayFixtures, getReplayMarkets } from "@/domain/replay";
+import { buildTradingSignals } from "@/domain/signals";
 
 export default function HomePage() {
   const fixtures = getReplayFixtures();
   const markets = getReplayMarkets();
+  const signals = buildTradingSignals({ markets, fixtures, events: getReplayEvents() });
 
   return (
     <main className="shell">
@@ -51,6 +54,7 @@ export default function HomePage() {
 
       <ComplianceNotice />
       <JudgeApiPanel />
+      <LineSignalPanel signals={signals} />
 
       <section className="section" aria-labelledby="markets-title">
         <h2 className="section-title" id="markets-title">

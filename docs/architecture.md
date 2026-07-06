@@ -1,6 +1,6 @@
 # SettleLine Architecture
 
-SettleLine is a replay-first TxODDS hackathon MVP for verifiable prediction-market settlement. It demonstrates the settlement and proof layer without enabling real-money wagering, deposits, custody, or wallet-gated review.
+SettleLine is a replay-first TxODDS hackathon MVP for verifiable prediction-market settlement and trading-agent risk signals. It demonstrates the settlement, proof, and pre-release review layer without enabling real-money wagering, deposits, custody, or wallet-gated review.
 
 ## Review Mode
 
@@ -17,6 +17,7 @@ TxLINE-shaped replay event
   -> fixture and market lookup
   -> deterministic settlement rule
   -> proof receipt
+  -> LineSignal readiness and risk summary
   -> replay-only mock escrow release
   -> receipt verification checks
   -> dashboard and JSON APIs
@@ -27,6 +28,7 @@ Core files:
 - `src/data/worldcup-replay.json`: replay fixtures, markets, and TxLINE-shaped event proof metadata.
 - `src/domain/replay.ts`: read-only replay data access.
 - `src/domain/settlement.ts`: deterministic rule engine.
+- `src/domain/signals.ts`: trading-agent signal builder for settlement readiness, confidence, proof slot, and risk reasons.
 - `src/domain/escrow.ts`: deterministic replay-only mock escrow release mapping.
 - `src/domain/proofs.ts`: receipt construction, stable SHA-256 hash, and verification checks.
 - `src/integrations/txline/replay-adapter.ts`: adapter used by pages and API routes.
@@ -92,11 +94,24 @@ The dashboard shows these checks on the market detail page. The same verificatio
 curl -s -X POST http://127.0.0.1:3027/api/markets/market-wc-001-winner/verify
 ```
 
+## LineSignal Trading-Agent Layer
+
+LineSignal is the Trading Tools and Agents extension. It does not place trades or recommend wagers. It turns the same TxLINE replay event into a judge-readable workflow signal for each market:
+
+- `workflowStatus`: whether the market is settlement-ready, still watching, or needs review.
+- `riskLevel`: low, medium, or high based on fixture finality, service level, and close-score/threshold sensitivity.
+- `confidence`: deterministic confidence score derived from TxLINE service level and market sensitivity.
+- `proofSlot`: Solana devnet proof slot attached to the replay event.
+- `riskReasons`: concise reasons an agent or reviewer should verify before releasing mock escrow.
+
+The layer is intentionally a pure domain function over replay fixtures, markets, and events, so a future live adapter can reuse it without changing UI or API contracts.
+
 ## API Surface
 
 ```bash
 GET  /api/health
 GET  /api/fixtures
+GET  /api/signals
 POST /api/markets/[marketId]/settle
 POST /api/markets/[marketId]/verify
 ```
@@ -114,9 +129,10 @@ Expected output:
 PASS health
 PASS settlement
 PASS verification
+PASS signals
 ```
 
-The evidence bundle also includes the proof receipt and mock escrow release JSON.
+The evidence bundle also includes the proof receipt, mock escrow release JSON, and LineSignal output.
 
 ## Live TxLINE Extension Path
 
