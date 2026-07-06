@@ -78,7 +78,7 @@ https://github.com/lustsazeus-lab/settleline/blob/main/docs/architecture.md
 Passing GitHub Actions evidence:
 
 ```text
-https://github.com/lustsazeus-lab/settleline/actions/runs/28811736463
+https://github.com/lustsazeus-lab/settleline/actions/runs/28815710008
 ```
 
 ## Verification Commands

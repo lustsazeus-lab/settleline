@@ -52,7 +52,7 @@ npm run build
 
 The GitHub Actions workflow in `.github/workflows/ci.yml` runs dependency audit, typecheck, tests, and production build on pushes to `main` and pull requests.
 
-Passing public CI evidence: https://github.com/lustsazeus-lab/settleline/actions/runs/28811736463
+Passing public CI evidence: https://github.com/lustsazeus-lab/settleline/actions/runs/28815710008
 
 Public demo release: https://github.com/lustsazeus-lab/settleline/releases/tag/settleline-demo-2026-07-07
 
