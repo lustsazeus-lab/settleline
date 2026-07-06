@@ -10,6 +10,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "evidence:bundle": "node scripts/evidence-bundle.mjs",
+    "submission:readiness": "node scripts/submission-readiness.mjs",
     "verify:submission": "node scripts/verify-submission.mjs"
   },
   "dependencies": {

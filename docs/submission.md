@@ -72,6 +72,7 @@ npm run test
 npm run build
 npm run verify:submission -- <public-url>
 npm run evidence:bundle -- <public-url>
+PUBLIC_REPO_URL=<repo-url> DEMO_VIDEO_URL=<video-url> npm run submission:readiness -- <public-url>
 ```
 
 Expected verifier output:
@@ -90,6 +91,8 @@ The evidence bundle command prints JSON containing:
 - SHA-256 receipt hash,
 - receipt verification checks,
 - copyable judge commands.
+
+The readiness command prints a Markdown packet containing copyable Superteam form fields, evidence summary, judge commands, and the remaining gates.
 
 ## TxLINE API Experience
 
@@ -119,6 +122,7 @@ SettleLine does not:
 - [ ] `docs/architecture.md` is reachable in the public repo.
 - [ ] `npm run verify:submission -- <public-url>` passes.
 - [ ] `npm run evidence:bundle -- <public-url>` includes mock escrow release and `valid: true`.
+- [ ] `npm run submission:readiness -- <public-url>` marks public MVP, repo, and demo video gates ready.
 - [ ] Demo video is public and under 5 minutes.
 - [ ] User confirms they are the real participant/owner.
 - [ ] User confirms Superteam submission action.

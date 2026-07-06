@@ -83,6 +83,7 @@ npm run test
 npm run build
 npm run verify:submission -- http://127.0.0.1:3027
 npm run evidence:bundle -- http://127.0.0.1:3027
+npm run submission:readiness -- http://127.0.0.1:3027
 ```
 
 Expected:
@@ -93,6 +94,7 @@ Expected:
 - Next build includes `/`, `/market/[marketId]`, `/api/health`, `/api/fixtures`, `/api/markets/[marketId]/settle`, and `/api/markets/[marketId]/verify`.
 - submission verifier prints `PASS health`, `PASS settlement`, and `PASS verification`.
 - evidence bundle prints health, receipt, mock escrow release, receipt hash, verification checks, and copyable judge commands as JSON.
+- readiness packet prints copyable submission fields and marks local-only public gates as incomplete.
 - public GitHub repo runs the same audit, typecheck, test, and build steps via `.github/workflows/ci.yml`.
 
 ## What Is Intentionally Out of Scope

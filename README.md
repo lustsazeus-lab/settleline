@@ -60,6 +60,14 @@ npm run evidence:bundle -- http://127.0.0.1:3027
 
 This prints a JSON bundle with the replay health response, deterministic receipt, mock escrow release, receipt hash, verification checks, and copyable judge commands. Use the same command with a public deployment URL after deployment.
 
+## Submission Readiness Packet
+
+```bash
+npm run submission:readiness -- http://127.0.0.1:3027
+```
+
+This prints a Markdown packet with copyable Superteam fields, evidence summary, judge commands, and remaining public-submission gates. Use a public HTTPS URL plus `PUBLIC_REPO_URL` and `DEMO_VIDEO_URL` after deployment.
+
 ## Review Aids
 
 - Architecture and proof model: `docs/architecture.md`
