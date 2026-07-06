@@ -71,6 +71,7 @@ npm run typecheck
 npm run test
 npm run build
 npm run verify:submission -- <public-url>
+npm run evidence:bundle -- <public-url>
 ```
 
 Expected verifier output:
@@ -80,6 +81,14 @@ PASS health
 PASS settlement
 PASS verification
 ```
+
+The evidence bundle command prints JSON containing:
+
+- deployment health and replay/no-real-money status,
+- deterministic proof receipt,
+- SHA-256 receipt hash,
+- receipt verification checks,
+- copyable judge commands.
 
 ## TxLINE API Experience
 

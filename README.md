@@ -51,6 +51,14 @@ npm run verify:submission -- http://127.0.0.1:3027
 
 Use the same command with a public deployment URL before submitting to Superteam.
 
+## Judge Evidence Bundle
+
+```bash
+npm run evidence:bundle -- http://127.0.0.1:3027
+```
+
+This prints a JSON bundle with the replay health response, deterministic receipt, receipt hash, verification checks, and copyable judge commands. Use the same command with a public deployment URL after deployment.
+
 ## Review Aids
 
 - Architecture and proof model: `docs/architecture.md`

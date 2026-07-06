@@ -9,6 +9,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
+    "evidence:bundle": "node scripts/evidence-bundle.mjs",
     "verify:submission": "node scripts/verify-submission.mjs"
   },
   "dependencies": {
