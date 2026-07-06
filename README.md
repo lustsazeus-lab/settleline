@@ -56,6 +56,7 @@ Use the same command with a public deployment URL before submitting to Superteam
 - Architecture and proof model: `docs/architecture.md`
 - Demo video script: `docs/demo-video-script.md`
 - Local judge runbook: `docs/judge-runbook.md`
+- Submission pack: `docs/submission.md`
 
 ## TxLINE References
 
