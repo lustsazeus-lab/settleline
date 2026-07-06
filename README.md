@@ -2,6 +2,10 @@
 
 SettleLine is a TxODDS World Cup hackathon MVP showing verifiable prediction-market settlement using TxLINE-shaped match data.
 
+Live MVP: https://settleline.vercel.app
+
+Public repo: https://github.com/lustsazeus-lab/settleline
+
 ## What It Demonstrates
 
 - TxLINE-shaped fixture and event ingestion.
@@ -44,10 +48,13 @@ npm run build
 
 The GitHub Actions workflow in `.github/workflows/ci.yml` runs dependency audit, typecheck, tests, and production build on pushes to `main` and pull requests.
 
+Passing public CI evidence: https://github.com/lustsazeus-lab/settleline/actions/runs/28811016041
+
 ## Submission Verifier
 
 ```bash
 npm run verify:submission -- http://127.0.0.1:3027
+npm run verify:submission -- https://settleline.vercel.app
 ```
 
 Use the same command with a public deployment URL before submitting to Superteam.
@@ -56,6 +63,7 @@ Use the same command with a public deployment URL before submitting to Superteam
 
 ```bash
 npm run evidence:bundle -- http://127.0.0.1:3027
+npm run evidence:bundle -- https://settleline.vercel.app
 ```
 
 This prints a JSON bundle with the replay health response, deterministic receipt, mock escrow release, receipt hash, verification checks, and copyable judge commands. Use the same command with a public deployment URL after deployment.
@@ -64,6 +72,7 @@ This prints a JSON bundle with the replay health response, deterministic receipt
 
 ```bash
 npm run submission:readiness -- http://127.0.0.1:3027
+PUBLIC_REPO_URL=https://github.com/lustsazeus-lab/settleline npm run submission:readiness -- https://settleline.vercel.app
 ```
 
 This prints a Markdown packet with copyable Superteam fields, evidence summary, judge commands, and remaining public-submission gates. Use a public HTTPS URL plus `PUBLIC_REPO_URL` and `DEMO_VIDEO_URL` after deployment.

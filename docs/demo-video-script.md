@@ -2,7 +2,7 @@
 
 Target length: 3:30-4:15.
 
-Use this script for the Superteam TxODDS submission video. Record the browser at `http://127.0.0.1:3027` after the local dev server is running.
+Use this script for the Superteam TxODDS submission video. Prefer recording the public MVP at `https://settleline.vercel.app`; use `http://127.0.0.1:3027` only for local fallback recording.
 
 ## 0:00-0:25 - Opening
 
@@ -72,11 +72,11 @@ Screen:
 - Show terminal commands:
 
 ```bash
-npm run verify:submission -- http://127.0.0.1:3027
-curl -s http://127.0.0.1:3027/api/health
-curl -s http://127.0.0.1:3027/api/fixtures
-curl -s -X POST http://127.0.0.1:3027/api/markets/market-wc-001-winner/settle
-curl -s -X POST http://127.0.0.1:3027/api/markets/market-wc-001-winner/verify
+npm run verify:submission -- https://settleline.vercel.app
+curl -s https://settleline.vercel.app/api/health
+curl -s https://settleline.vercel.app/api/fixtures
+curl -s -X POST https://settleline.vercel.app/api/markets/market-wc-001-winner/settle
+curl -s -X POST https://settleline.vercel.app/api/markets/market-wc-001-winner/verify
 ```
 
 - Show health JSON, receipt JSON, and verification JSON.

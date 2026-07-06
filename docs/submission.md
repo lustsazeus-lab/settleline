@@ -1,6 +1,6 @@
 # SettleLine Submission Pack
 
-Use this pack after public deployment, public GitHub publication, demo recording, and participant-owner confirmation. Do not submit through Superteam from an AI agent account.
+Use this pack after demo recording and participant-owner confirmation. Do not submit through Superteam from an AI agent account.
 
 ## Listing
 
@@ -20,7 +20,15 @@ The project focuses on the settlement layer rather than gambling UX: judges can 
 
 ## Live MVP Link
 
-TBD after deployment.
+https://settleline.vercel.app
+
+Deployment provider: Vercel.
+
+Canonical deployment URL:
+
+```text
+https://settleline-hbk23cgzb-yihangdeng-9983s-projects.vercel.app
+```
 
 Deployment runbook: `docs/deployment.md`.
 
@@ -41,7 +49,7 @@ Use `docs/demo-video-script.md`. Target length: under 5 minutes.
 
 ## Public Repository Link
 
-TBD after public GitHub repo is created and pushed.
+https://github.com/lustsazeus-lab/settleline
 
 Repository should show:
 
@@ -53,12 +61,12 @@ Repository should show:
 
 ## Technical Documentation Link
 
-Preferred: public repo link to `docs/architecture.md`.
+https://github.com/lustsazeus-lab/settleline/blob/main/docs/architecture.md
 
-Fallback while local only:
+Passing GitHub Actions evidence:
 
 ```text
-/Users/ryanai/Documents/好用工具/ProfitCollect/settleline/docs/architecture.md
+https://github.com/lustsazeus-lab/settleline/actions/runs/28811016041
 ```
 
 ## Verification Commands
@@ -70,9 +78,9 @@ npm audit --audit-level=moderate
 npm run typecheck
 npm run test
 npm run build
-npm run verify:submission -- <public-url>
-npm run evidence:bundle -- <public-url>
-PUBLIC_REPO_URL=<repo-url> DEMO_VIDEO_URL=<video-url> npm run submission:readiness -- <public-url>
+npm run verify:submission -- https://settleline.vercel.app
+npm run evidence:bundle -- https://settleline.vercel.app
+PUBLIC_REPO_URL=https://github.com/lustsazeus-lab/settleline DEMO_VIDEO_URL=<video-url> npm run submission:readiness -- https://settleline.vercel.app
 ```
 
 Expected verifier output:
@@ -113,16 +121,16 @@ SettleLine does not:
 
 ## Final Submission Checklist
 
-- [ ] Public MVP URL is live.
-- [ ] Deployment runbook stop conditions are clear.
-- [ ] Public MVP opens without login or wallet.
-- [ ] Public MVP shows replay/no-real-money compliance copy.
-- [ ] Public GitHub repo is available.
-- [ ] GitHub Actions CI is visible and passing.
-- [ ] `docs/architecture.md` is reachable in the public repo.
-- [ ] `npm run verify:submission -- <public-url>` passes.
-- [ ] `npm run evidence:bundle -- <public-url>` includes mock escrow release and `valid: true`.
-- [ ] `npm run submission:readiness -- <public-url>` marks public MVP, repo, and demo video gates ready.
+- [x] Public MVP URL is live.
+- [x] Deployment runbook stop conditions are clear.
+- [x] Public MVP opens without login or wallet.
+- [x] Public MVP shows replay/no-real-money compliance copy.
+- [x] Public GitHub repo is available.
+- [x] GitHub Actions CI is visible and passing.
+- [x] `docs/architecture.md` is reachable in the public repo.
+- [x] `npm run verify:submission -- https://settleline.vercel.app` passes.
+- [x] `npm run evidence:bundle -- https://settleline.vercel.app` includes mock escrow release and `valid: true`.
+- [ ] `npm run submission:readiness -- https://settleline.vercel.app` marks public MVP, repo, and demo video gates ready.
 - [ ] Demo video is public and under 5 minutes.
 - [ ] User confirms they are the real participant/owner.
 - [ ] User confirms Superteam submission action.
