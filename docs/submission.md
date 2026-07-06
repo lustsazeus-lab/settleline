@@ -22,6 +22,8 @@ The project focuses on the settlement layer rather than gambling UX: judges can 
 
 TBD after deployment.
 
+Deployment runbook: `docs/deployment.md`.
+
 Requirements for the link:
 
 - Public HTTPS URL.
@@ -99,6 +101,7 @@ SettleLine does not:
 ## Final Submission Checklist
 
 - [ ] Public MVP URL is live.
+- [ ] Deployment runbook stop conditions are clear.
 - [ ] Public MVP opens without login or wallet.
 - [ ] Public MVP shows replay/no-real-money compliance copy.
 - [ ] Public GitHub repo is available.

@@ -54,6 +54,7 @@ Use the same command with a public deployment URL before submitting to Superteam
 ## Review Aids
 
 - Architecture and proof model: `docs/architecture.md`
+- Deployment runbook: `docs/deployment.md`
 - Demo video script: `docs/demo-video-script.md`
 - Local judge runbook: `docs/judge-runbook.md`
 - Submission pack: `docs/submission.md`
