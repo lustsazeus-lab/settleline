@@ -1,6 +1,6 @@
 # SettleLine Architecture
 
-SettleLine is a replay-first TxODDS hackathon MVP for verifiable prediction-market settlement and trading-agent risk signals. It demonstrates the settlement, proof, and pre-release review layer without enabling real-money wagering, deposits, custody, or wallet-gated review.
+SettleLine is a replay-first TxODDS hackathon MVP for verifiable prediction-market settlement, trading-agent risk signals, and consumer fan experiences. It demonstrates the settlement, proof, fan engagement, and pre-release review layer without enabling real-money wagering, deposits, custody, or wallet-gated review.
 
 ## Review Mode
 
@@ -17,6 +17,7 @@ TxLINE-shaped replay event
   -> fixture and market lookup
   -> deterministic settlement rule
   -> proof receipt
+  -> FanPulse consumer story, Hi-Lo game, and sweepstake leaderboard
   -> LineSignal readiness and risk summary
   -> replay-only mock escrow release
   -> receipt verification checks
@@ -28,6 +29,7 @@ Core files:
 - `src/data/worldcup-replay.json`: replay fixtures, markets, and TxLINE-shaped event proof metadata.
 - `src/domain/replay.ts`: read-only replay data access.
 - `src/domain/settlement.ts`: deterministic rule engine.
+- `src/domain/fan-pulse.ts`: consumer fan experience builder for story cards, Hi-Lo game state, sweepstake points, proof metadata, and no-wagering safeguards.
 - `src/domain/signals.ts`: trading-agent signal builder for settlement readiness, confidence, proof slot, and risk reasons.
 - `src/domain/escrow.ts`: deterministic replay-only mock escrow release mapping.
 - `src/domain/proofs.ts`: receipt construction, stable SHA-256 hash, and verification checks.
@@ -106,11 +108,39 @@ LineSignal is the Trading Tools and Agents extension. It does not place trades o
 
 The layer is intentionally a pure domain function over replay fixtures, markets, and events, so a future live adapter can reuse it without changing UI or API contracts.
 
+## FanPulse Consumer Layer
+
+FanPulse is the Consumer and Fan Experiences extension. It is a fan-facing page and API over the same TxLINE-shaped replay data, designed for mainstream World Cup viewers rather than market operators.
+
+It produces:
+
+- `hero`: a plain-language match story such as Argentina 2-1 France.
+- `moments`: score, Hi-Lo challenge, proof, and shareable recap cards.
+- `hiLoGame`: a deterministic higher/lower stat prompt derived from total goals and the market threshold.
+- `sweepstake`: a friend leaderboard that awards points for goals, match result, and TxLINE proof.
+- `proof`: event id, source, slot, and program id exposed for judge review.
+- `safety`: explicit `realMoneyWagering: false`, `custody: false`, and replay/no-custody/no-real-money safeguards.
+
+The live page is:
+
+```text
+/fan
+```
+
+The judge API is:
+
+```bash
+curl -s http://127.0.0.1:3027/api/fan-pulse
+```
+
+FanPulse intentionally avoids betting UX, deposit flows, wallet signatures, and custodial prizes. Its monetization path is sponsor-safe watch rooms, branded community packages, and replay archives.
+
 ## API Surface
 
 ```bash
 GET  /api/health
 GET  /api/fixtures
+GET  /api/fan-pulse
 GET  /api/signals
 POST /api/markets/[marketId]/settle
 POST /api/markets/[marketId]/verify
@@ -129,10 +159,11 @@ Expected output:
 PASS health
 PASS settlement
 PASS verification
+PASS fan-pulse
 PASS signals
 ```
 
-The evidence bundle also includes the proof receipt, mock escrow release JSON, and LineSignal output.
+The evidence bundle also includes the proof receipt, mock escrow release JSON, FanPulse payload, and LineSignal output.
 
 ## Live TxLINE Extension Path
 
