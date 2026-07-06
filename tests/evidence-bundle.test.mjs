@@ -52,6 +52,19 @@ describe("buildEvidenceBundle", () => {
         });
       }
 
+      if (url.endsWith("/api/fan-pulse")) {
+        return jsonResponse({
+          track: "Consumer and Fan Experiences",
+          fanPulse: {
+            fixtureId: "wc-2026-demo-001",
+            scoreline: "ARG 2-1 FRA",
+            hiLoGame: { correctChoice: "HI" },
+            proof: { slot: 392100001 },
+            safety: { realMoneyWagering: false },
+          },
+        });
+      }
+
       if (url.endsWith("/api/signals")) {
         return jsonResponse({
           track: "Trading Tools and Agents",
@@ -93,6 +106,16 @@ describe("buildEvidenceBundle", () => {
           { label: "Receipt hash", passed: true },
         ],
       },
+      fanPulse: {
+        track: "Consumer and Fan Experiences",
+        fanPulse: {
+          fixtureId: "wc-2026-demo-001",
+          scoreline: "ARG 2-1 FRA",
+          hiLoGame: { correctChoice: "HI" },
+          proof: { slot: 392100001 },
+          safety: { realMoneyWagering: false },
+        },
+      },
       signals: {
         track: "Trading Tools and Agents",
         signals: [{ marketId: "market-wc-001-winner", workflowStatus: "settlement-ready", riskLevel: "medium" }],
@@ -101,6 +124,7 @@ describe("buildEvidenceBundle", () => {
         "curl -s https://settleline.example/api/health",
         "curl -s -X POST https://settleline.example/api/markets/market-wc-001-winner/settle",
         "curl -s -X POST https://settleline.example/api/markets/market-wc-001-winner/verify",
+        "curl -s https://settleline.example/api/fan-pulse",
         "curl -s https://settleline.example/api/signals",
         "npm run verify:submission -- https://settleline.example",
       ],
@@ -110,6 +134,7 @@ describe("buildEvidenceBundle", () => {
       { url: "https://settleline.example/api/health", method: "GET" },
       { url: "https://settleline.example/api/markets/market-wc-001-winner/settle", method: "POST" },
       { url: "https://settleline.example/api/markets/market-wc-001-winner/verify", method: "POST" },
+      { url: "https://settleline.example/api/fan-pulse", method: "GET" },
       { url: "https://settleline.example/api/signals", method: "GET" },
     ]);
   });

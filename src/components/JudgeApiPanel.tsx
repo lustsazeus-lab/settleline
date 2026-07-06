@@ -16,6 +16,11 @@ const judgeEndpoints = [
   },
   {
     method: "GET",
+    path: "/api/fan-pulse",
+    signal: "track: Consumer and Fan Experiences",
+  },
+  {
+    method: "GET",
     path: "/api/signals",
     signal: "riskLevel: medium",
   },

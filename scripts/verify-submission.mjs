@@ -10,6 +10,7 @@ export async function verifySubmissionTarget(baseUrl, fetcher = fetch) {
     await checkHealth(origin, fetcher),
     await checkSettlement(origin, fetcher),
     await checkVerification(origin, fetcher),
+    await checkFanPulse(origin, fetcher),
     await checkSignals(origin, fetcher),
   ];
 
@@ -64,6 +65,20 @@ async function checkSignals(origin, fetcher) {
           signal.workflowStatus === "settlement-ready" &&
           ["low", "medium", "high"].includes(signal.riskLevel),
       ),
+  };
+}
+
+async function checkFanPulse(origin, fetcher) {
+  const body = await readJson(fetcher(`${origin}/api/fan-pulse`));
+
+  return {
+    label: "fan-pulse",
+    passed:
+      body.track === "Consumer and Fan Experiences" &&
+      body.fanPulse?.scoreline === "ARG 2-1 FRA" &&
+      body.fanPulse?.hiLoGame?.correctChoice === "HI" &&
+      body.fanPulse?.proof?.slot === 392100001 &&
+      body.fanPulse?.safety?.realMoneyWagering === false,
   };
 }
 

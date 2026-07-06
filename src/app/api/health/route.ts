@@ -14,6 +14,7 @@ export function GET() {
     },
     routes: [
       "/api/fixtures",
+      "/api/fan-pulse",
       "/api/signals",
       "/api/markets/[marketId]/settle",
       "/api/markets/[marketId]/verify",

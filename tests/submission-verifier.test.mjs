@@ -39,6 +39,18 @@ describe("verifySubmissionTarget", () => {
         return jsonResponse({ verification: { valid: true } });
       }
 
+      if (url.endsWith("/api/fan-pulse")) {
+        return jsonResponse({
+          track: "Consumer and Fan Experiences",
+          fanPulse: {
+            scoreline: "ARG 2-1 FRA",
+            hiLoGame: { correctChoice: "HI" },
+            proof: { slot: 392100001 },
+            safety: { realMoneyWagering: false },
+          },
+        });
+      }
+
       if (url.endsWith("/api/signals")) {
         return jsonResponse({
           track: "Trading Tools and Agents",
@@ -55,6 +67,7 @@ describe("verifySubmissionTarget", () => {
         { label: "health", passed: true },
         { label: "settlement", passed: true },
         { label: "verification", passed: true },
+        { label: "fan-pulse", passed: true },
         { label: "signals", passed: true },
       ],
     });
@@ -62,6 +75,7 @@ describe("verifySubmissionTarget", () => {
       { url: "https://settleline.example/api/health", method: "GET" },
       { url: "https://settleline.example/api/markets/market-wc-001-winner/settle", method: "POST" },
       { url: "https://settleline.example/api/markets/market-wc-001-winner/verify", method: "POST" },
+      { url: "https://settleline.example/api/fan-pulse", method: "GET" },
       { url: "https://settleline.example/api/signals", method: "GET" },
     ]);
   });
@@ -81,6 +95,25 @@ describe("verifySubmissionTarget", () => {
         });
       }
 
+      if (url.endsWith("/api/fan-pulse")) {
+        return jsonResponse({
+          track: "Consumer and Fan Experiences",
+          fanPulse: {
+            scoreline: "ARG 2-1 FRA",
+            hiLoGame: { correctChoice: "HI" },
+            proof: { slot: 392100001 },
+            safety: { realMoneyWagering: false },
+          },
+        });
+      }
+
+      if (url.endsWith("/api/signals")) {
+        return jsonResponse({
+          track: "Trading Tools and Agents",
+          signals: [{ marketId: "market-wc-001-winner", workflowStatus: "settlement-ready", riskLevel: "medium" }],
+        });
+      }
+
       return jsonResponse({ verification: { valid: false } });
     };
 
@@ -90,7 +123,8 @@ describe("verifySubmissionTarget", () => {
         { label: "health", passed: true },
         { label: "settlement", passed: true },
         { label: "verification", passed: false },
-        { label: "signals", passed: false },
+        { label: "fan-pulse", passed: true },
+        { label: "signals", passed: true },
       ],
     });
   });
@@ -126,6 +160,21 @@ describe("verifySubmissionTarget", () => {
         return;
       }
 
+      if (request.url === "/api/fan-pulse") {
+        response.end(
+          JSON.stringify({
+            track: "Consumer and Fan Experiences",
+            fanPulse: {
+              scoreline: "ARG 2-1 FRA",
+              hiLoGame: { correctChoice: "HI" },
+              proof: { slot: 392100001 },
+              safety: { realMoneyWagering: false },
+            },
+          }),
+        );
+        return;
+      }
+
       response.end(JSON.stringify({ verification: { valid: true } }));
     });
 
@@ -141,6 +190,7 @@ describe("verifySubmissionTarget", () => {
       expect(stdout).toContain("PASS health");
       expect(stdout).toContain("PASS settlement");
       expect(stdout).toContain("PASS verification");
+      expect(stdout).toContain("PASS fan-pulse");
       expect(stdout).toContain("PASS signals");
     } finally {
       await new Promise((resolve, reject) => server.close((error) => (error ? reject(error) : resolve())));

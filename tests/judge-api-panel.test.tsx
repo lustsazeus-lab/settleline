@@ -8,9 +8,11 @@ describe("JudgeApiPanel", () => {
 
     expect(html).toContain("Judge API");
     expect(html).toContain("/api/health");
+    expect(html).toContain("/api/fan-pulse");
     expect(html).toContain("/api/markets/market-wc-001-winner/settle");
     expect(html).toContain("/api/markets/market-wc-001-winner/verify");
     expect(html).toContain("status: ok");
+    expect(html).toContain("track: Consumer and Fan Experiences");
     expect(html).toContain("receiptHash: sha256");
     expect(html).toContain("valid: true");
   });

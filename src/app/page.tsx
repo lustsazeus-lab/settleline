@@ -1,14 +1,18 @@
 import { ComplianceNotice } from "@/components/ComplianceNotice";
+import { FanPulsePanel } from "@/components/FanPulsePanel";
 import { JudgeApiPanel } from "@/components/JudgeApiPanel";
 import { LineSignalPanel } from "@/components/LineSignalPanel";
 import { MarketCard } from "@/components/MarketCard";
+import { buildFanPulseExperience } from "@/domain/fan-pulse";
 import { getReplayEvents, getReplayFixtures, getReplayMarkets } from "@/domain/replay";
 import { buildTradingSignals } from "@/domain/signals";
 
 export default function HomePage() {
   const fixtures = getReplayFixtures();
   const markets = getReplayMarkets();
-  const signals = buildTradingSignals({ markets, fixtures, events: getReplayEvents() });
+  const events = getReplayEvents();
+  const signals = buildTradingSignals({ markets, fixtures, events });
+  const fanPulse = buildFanPulseExperience({ markets, fixtures, events });
 
   return (
     <main className="shell">
@@ -54,6 +58,7 @@ export default function HomePage() {
 
       <ComplianceNotice />
       <JudgeApiPanel />
+      <FanPulsePanel pulse={fanPulse} />
       <LineSignalPanel signals={signals} />
 
       <section className="section" aria-labelledby="markets-title">
