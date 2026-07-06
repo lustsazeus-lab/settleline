@@ -23,6 +23,7 @@ Open `http://127.0.0.1:3027`.
 ## Replay APIs
 
 ```bash
+curl -s http://127.0.0.1:3027/api/health
 curl -s http://127.0.0.1:3027/api/fixtures
 curl -s -X POST http://127.0.0.1:3027/api/markets/market-wc-001-winner/settle
 curl -s -X POST http://127.0.0.1:3027/api/markets/market-wc-001-winner/verify

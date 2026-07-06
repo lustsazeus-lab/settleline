@@ -34,9 +34,16 @@ http://127.0.0.1:3027
 ## API Checks
 
 ```bash
+curl -s http://127.0.0.1:3027/api/health
 curl -s http://127.0.0.1:3027/api/fixtures
 curl -s -X POST http://127.0.0.1:3027/api/markets/market-wc-001-winner/settle
 curl -s -X POST http://127.0.0.1:3027/api/markets/market-wc-001-winner/verify
+```
+
+Expected health status:
+
+```text
+"status":"ok"
 ```
 
 Expected settlement receipt id:
@@ -70,8 +77,8 @@ Expected:
 
 - no audit vulnerabilities at moderate level or higher,
 - TypeScript exits cleanly,
-- 11 Vitest tests pass,
-- Next build includes `/`, `/market/[marketId]`, `/api/fixtures`, `/api/markets/[marketId]/settle`, and `/api/markets/[marketId]/verify`.
+- 12 Vitest tests pass,
+- Next build includes `/`, `/market/[marketId]`, `/api/health`, `/api/fixtures`, `/api/markets/[marketId]/settle`, and `/api/markets/[marketId]/verify`.
 
 ## What Is Intentionally Out of Scope
 
