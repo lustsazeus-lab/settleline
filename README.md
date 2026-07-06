@@ -6,6 +6,8 @@ Live MVP: https://settleline.vercel.app
 
 Public repo: https://github.com/lustsazeus-lab/settleline
 
+Demo video: https://github.com/lustsazeus-lab/settleline/releases/download/settleline-demo-2026-07-07/settleline-demo.mp4
+
 ## What It Demonstrates
 
 - TxLINE-shaped fixture and event ingestion.
@@ -48,7 +50,9 @@ npm run build
 
 The GitHub Actions workflow in `.github/workflows/ci.yml` runs dependency audit, typecheck, tests, and production build on pushes to `main` and pull requests.
 
-Passing public CI evidence: https://github.com/lustsazeus-lab/settleline/actions/runs/28811016041
+Passing public CI evidence: https://github.com/lustsazeus-lab/settleline/actions/runs/28811736463
+
+Public demo release: https://github.com/lustsazeus-lab/settleline/releases/tag/settleline-demo-2026-07-07
 
 ## Submission Verifier
 
@@ -73,6 +77,7 @@ This prints a JSON bundle with the replay health response, deterministic receipt
 ```bash
 npm run submission:readiness -- http://127.0.0.1:3027
 PUBLIC_REPO_URL=https://github.com/lustsazeus-lab/settleline npm run submission:readiness -- https://settleline.vercel.app
+PUBLIC_REPO_URL=https://github.com/lustsazeus-lab/settleline DEMO_VIDEO_URL=https://github.com/lustsazeus-lab/settleline/releases/download/settleline-demo-2026-07-07/settleline-demo.mp4 npm run submission:readiness -- https://settleline.vercel.app
 ```
 
 This prints a Markdown packet with copyable Superteam fields, evidence summary, judge commands, and remaining public-submission gates. Use a public HTTPS URL plus `PUBLIC_REPO_URL` and `DEMO_VIDEO_URL` after deployment.

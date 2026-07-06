@@ -43,9 +43,21 @@ Requirements for the link:
 
 ## Demo Video Link
 
-TBD after recording.
+https://github.com/lustsazeus-lab/settleline/releases/download/settleline-demo-2026-07-07/settleline-demo.mp4
 
-Use `docs/demo-video-script.md`. Target length: under 5 minutes.
+Release page:
+
+```text
+https://github.com/lustsazeus-lab/settleline/releases/tag/settleline-demo-2026-07-07
+```
+
+Video SHA-256:
+
+```text
+b5dfb396a7728da272b5cb2bbe7f87f3006de4af5c3807dfb76ad640f904509a
+```
+
+Generated from `docs/demo-video-script.md`. Runtime: about 76 seconds.
 
 ## Public Repository Link
 
@@ -66,7 +78,7 @@ https://github.com/lustsazeus-lab/settleline/blob/main/docs/architecture.md
 Passing GitHub Actions evidence:
 
 ```text
-https://github.com/lustsazeus-lab/settleline/actions/runs/28811016041
+https://github.com/lustsazeus-lab/settleline/actions/runs/28811736463
 ```
 
 ## Verification Commands
@@ -80,7 +92,7 @@ npm run test
 npm run build
 npm run verify:submission -- https://settleline.vercel.app
 npm run evidence:bundle -- https://settleline.vercel.app
-PUBLIC_REPO_URL=https://github.com/lustsazeus-lab/settleline DEMO_VIDEO_URL=<video-url> npm run submission:readiness -- https://settleline.vercel.app
+PUBLIC_REPO_URL=https://github.com/lustsazeus-lab/settleline DEMO_VIDEO_URL=https://github.com/lustsazeus-lab/settleline/releases/download/settleline-demo-2026-07-07/settleline-demo.mp4 npm run submission:readiness -- https://settleline.vercel.app
 ```
 
 Expected verifier output:
@@ -130,7 +142,7 @@ SettleLine does not:
 - [x] `docs/architecture.md` is reachable in the public repo.
 - [x] `npm run verify:submission -- https://settleline.vercel.app` passes.
 - [x] `npm run evidence:bundle -- https://settleline.vercel.app` includes mock escrow release and `valid: true`.
-- [ ] `npm run submission:readiness -- https://settleline.vercel.app` marks public MVP, repo, and demo video gates ready.
-- [ ] Demo video is public and under 5 minutes.
+- [x] `npm run submission:readiness -- https://settleline.vercel.app` marks public MVP, repo, and demo video gates ready.
+- [x] Demo video is public and under 5 minutes.
 - [ ] User confirms they are the real participant/owner.
 - [ ] User confirms Superteam submission action.
