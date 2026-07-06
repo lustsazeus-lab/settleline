@@ -15,6 +15,7 @@ describe("POST /api/markets/[marketId]/verify", () => {
         valid: true,
         checks: expect.arrayContaining([
           { label: "Receipt id", passed: true },
+          { label: "Receipt hash", passed: true },
           { label: "Market binding", passed: true },
           { label: "Fixture binding", passed: true },
           { label: "Event binding", passed: true },

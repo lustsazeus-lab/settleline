@@ -6,7 +6,7 @@ SettleLine is a TxODDS World Cup hackathon MVP showing verifiable prediction-mar
 
 - TxLINE-shaped fixture and event ingestion.
 - Deterministic market resolution.
-- Proof receipts with Solana program metadata.
+- Proof receipts with deterministic SHA-256 hashes and Solana program metadata.
 - Receipt verification checks for market, fixture, event, proof metadata, and winning selection.
 - No-wallet judge mode.
 - Compliance-safe devnet/replay behavior without real-money wagering.

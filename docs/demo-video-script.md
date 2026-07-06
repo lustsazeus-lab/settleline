@@ -52,6 +52,7 @@ Screen:
 - Show `Proof Receipt`.
 - Highlight:
   - receipt id,
+  - receipt hash,
   - winning selection `ARG`,
   - reason `Argentina defeated France 2-1`,
   - program ID,
@@ -63,7 +64,7 @@ Screen:
 
 Voiceover:
 
-The same flow is available through simple API routes. Judges can inspect fixtures and settlement output directly, which makes the demo easy to test even without interacting with the browser UI.
+The same flow is available through simple API routes. Judges can inspect fixtures, settlement output, and verification checks directly, which makes the demo easy to test even without interacting with the browser UI.
 
 Screen:
 

@@ -7,6 +7,8 @@ export function ProofReceipt({ receipt }: { receipt: ProofReceiptType }) {
       <dl>
         <dt>Receipt</dt>
         <dd>{receipt.receiptId}</dd>
+        <dt>Receipt hash</dt>
+        <dd>{receipt.receiptHash}</dd>
         <dt>Winning selection</dt>
         <dd className="winner">{receipt.outcome.winningSelection}</dd>
         <dt>Reason</dt>

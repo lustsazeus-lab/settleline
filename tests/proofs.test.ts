@@ -38,6 +38,7 @@ describe("buildProofReceipt", () => {
   it("creates a deterministic receipt id", () => {
     expect(buildProofReceipt("fixture-1", outcome, event)).toEqual({
       receiptId: "receipt-market-1-event-1-392100001",
+      receiptHash: "sha256:dd0f9eb1a194abbbc7a6d54b985125031168ea7ae50d78a90f1f7a58ae87da59",
       marketId: "market-1",
       fixtureId: "fixture-1",
       outcome,
@@ -55,6 +56,7 @@ describe("verifyProofReceipt", () => {
       valid: true,
       checks: [
         { label: "Receipt id", passed: true },
+        { label: "Receipt hash", passed: true },
         { label: "Market binding", passed: true },
         { label: "Fixture binding", passed: true },
         { label: "Event binding", passed: true },
@@ -73,6 +75,18 @@ describe("verifyProofReceipt", () => {
     expect(verifyProofReceipt(receipt, { market, event })).toEqual({
       valid: false,
       checks: expect.arrayContaining([{ label: "Market binding", passed: false }]),
+    });
+  });
+
+  it("rejects a receipt whose hash was tampered with", () => {
+    const receipt = {
+      ...buildProofReceipt("fixture-1", outcome, event),
+      receiptHash: "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    };
+
+    expect(verifyProofReceipt(receipt, { market, event })).toEqual({
+      valid: false,
+      checks: expect.arrayContaining([{ label: "Receipt hash", passed: false }]),
     });
   });
 });

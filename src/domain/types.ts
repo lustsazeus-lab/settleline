@@ -58,6 +58,7 @@ export type SettlementOutcome = {
 
 export type ProofReceipt = {
   receiptId: string;
+  receiptHash: string;
   marketId: string;
   fixtureId: string;
   outcome: SettlementOutcome;

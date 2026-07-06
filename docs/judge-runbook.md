@@ -24,6 +24,7 @@ http://127.0.0.1:3027
 4. Opening `Match Winner` shows:
    - settlement timeline,
    - proof receipt,
+   - deterministic `sha256:` receipt hash,
    - winning selection `ARG`,
    - reason `Argentina defeated France 2-1`,
    - Solana devnet program ID,
@@ -69,7 +70,7 @@ Expected:
 
 - no audit vulnerabilities at moderate level or higher,
 - TypeScript exits cleanly,
-- 9 Vitest tests pass,
+- 11 Vitest tests pass,
 - Next build includes `/`, `/market/[marketId]`, `/api/fixtures`, `/api/markets/[marketId]/settle`, and `/api/markets/[marketId]/verify`.
 
 ## What Is Intentionally Out of Scope
