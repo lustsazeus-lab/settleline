@@ -14,6 +14,7 @@ Demo video: https://github.com/lustsazeus-lab/settleline/releases/download/settl
 - Deterministic market resolution.
 - Proof receipts with deterministic SHA-256 hashes and Solana program metadata.
 - Receipt verification checks for market, fixture, event, proof metadata, and winning selection.
+- Solana devnet receipt-attestation drafts that turn each receipt hash into a bounded memo payload for a devnet transaction.
 - Replay-only mock escrow release mapping for the winning selection.
 - LineSignal trading-agent summaries that classify settlement readiness, confidence, proof slot, and risk reasons before mock escrow release.
 - Judge-facing API panel for health, settlement, verification, and signal checks.
@@ -37,6 +38,7 @@ curl -s http://127.0.0.1:3027/api/fixtures
 curl -s http://127.0.0.1:3027/api/signals
 curl -s -X POST http://127.0.0.1:3027/api/markets/market-wc-001-winner/settle
 curl -s -X POST http://127.0.0.1:3027/api/markets/market-wc-001-winner/verify
+curl -s -X POST http://127.0.0.1:3027/api/markets/market-wc-001-winner/attest
 ```
 
 ## Test
@@ -72,7 +74,7 @@ npm run evidence:bundle -- http://127.0.0.1:3027
 npm run evidence:bundle -- https://settleline.vercel.app
 ```
 
-This prints a JSON bundle with the replay health response, deterministic receipt, mock escrow release, receipt hash, verification checks, and copyable judge commands. Use the same command with a public deployment URL after deployment.
+This prints a JSON bundle with the replay health response, deterministic receipt, mock escrow release, receipt hash, verification checks, devnet attestation draft, and copyable judge commands. Use the same command with a public deployment URL after deployment.
 
 ## Submission Readiness Packet
 
@@ -87,6 +89,7 @@ This prints a Markdown packet with copyable Superteam fields, evidence summary, 
 ## Review Aids
 
 - Architecture and proof model: `docs/architecture.md`
+- Devnet attestation model: `docs/solana-devnet-attestation.md`
 - Deployment runbook: `docs/deployment.md`
 - Demo video script: `docs/demo-video-script.md`
 - Local judge runbook: `docs/judge-runbook.md`

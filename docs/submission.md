@@ -14,7 +14,7 @@ SettleLine
 
 ## Brief Explanation
 
-SettleLine is a verifiable World Cup prediction settlement and trading-agent dashboard built on top of TxLINE-shaped data. It shows how live or replayed TxLINE match updates can drive deterministic market resolution, produce a transparent proof receipt with a deterministic SHA-256 hash, verify that receipt against market/event/proof metadata, generate LineSignal risk summaries for agent review, and trigger a devnet/mock escrow settlement flow without requiring real-money wagering.
+SettleLine is a verifiable World Cup prediction settlement and trading-agent dashboard built on top of TxLINE-shaped data. It shows how live or replayed TxLINE match updates can drive deterministic market resolution, produce a transparent proof receipt with a deterministic SHA-256 hash, verify that receipt against market/event/proof metadata, generate a Solana devnet receipt-attestation memo draft, generate LineSignal risk summaries for agent review, and trigger a devnet/mock escrow settlement flow without requiring real-money wagering.
 
 The project focuses on the settlement and pre-release review layer rather than gambling UX: judges can open the app without a wallet, inspect the fixture state, review the settlement condition, replay the TxLINE-shaped score event, inspect LineSignal readiness/risk cards, verify the hashed receipt checks, and see how the final result maps to a proof-backed payout decision.
 
@@ -101,6 +101,8 @@ Expected verifier output:
 PASS health
 PASS settlement
 PASS verification
+PASS attestation
+PASS fan-pulse
 PASS signals
 ```
 
@@ -111,6 +113,7 @@ The evidence bundle command prints JSON containing:
 - replay-only mock escrow release,
 - SHA-256 receipt hash,
 - receipt verification checks,
+- Solana devnet attestation draft,
 - LineSignal Trading Tools and Agents output,
 - copyable judge commands.
 
@@ -123,6 +126,8 @@ TxLINE's strongest point is that it treats sports data as more than a JSON feed:
 The main friction was the activation path: a builder has to keep network, Solana RPC, program ID, guest JWT, subscription transaction, and API host aligned. For future builders, a tiny end-to-end sample app or hosted sandbox token would reduce setup mistakes and let teams spend more time on the product layer.
 
 ## Safety / Compliance Boundary
+
+SettleLine's attestation endpoint is dry-run by default. It returns the exact memo payload that can be sent to Solana devnet with a throwaway devnet keypair, but it does not use the user's wallet or make any mainnet claim.
 
 SettleLine does not:
 
@@ -143,7 +148,7 @@ SettleLine does not:
 - [x] GitHub Actions CI is visible and passing.
 - [x] `docs/architecture.md` is reachable in the public repo.
 - [x] `npm run verify:submission -- https://settleline.vercel.app` passes.
-- [x] `npm run evidence:bundle -- https://settleline.vercel.app` includes mock escrow release and `valid: true`.
+- [x] `npm run evidence:bundle -- https://settleline.vercel.app` includes mock escrow release, devnet attestation draft, and `valid: true`.
 - [x] `npm run submission:readiness -- https://settleline.vercel.app` marks public MVP, repo, and demo video gates ready.
 - [x] Demo video is public and under 5 minutes.
 - [ ] User confirms they are the real participant/owner.

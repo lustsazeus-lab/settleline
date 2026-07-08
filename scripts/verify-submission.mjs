@@ -10,6 +10,7 @@ export async function verifySubmissionTarget(baseUrl, fetcher = fetch) {
     await checkHealth(origin, fetcher),
     await checkSettlement(origin, fetcher),
     await checkVerification(origin, fetcher),
+    await checkAttestation(origin, fetcher),
     await checkFanPulse(origin, fetcher),
     await checkSignals(origin, fetcher),
   ];
@@ -48,6 +49,23 @@ async function checkVerification(origin, fetcher) {
   return {
     label: "verification",
     passed: body.verification?.valid === true,
+  };
+}
+
+async function checkAttestation(origin, fetcher) {
+  const body = await readJson(fetcher(`${origin}/api/markets/${MARKET_ID}/attest`, { method: "POST" }));
+  const attestation = body.attestation;
+
+  return {
+    label: "attestation",
+    passed:
+      attestation?.mode === "dry-run" &&
+      attestation?.network === "solana-devnet" &&
+      typeof attestation?.memo === "string" &&
+      attestation.memo.includes("receipt=sha256:") &&
+      Array.isArray(attestation.safeguards) &&
+      attestation.safeguards.includes("devnet-only") &&
+      attestation.safeguards.includes("no-user-wallet"),
   };
 }
 

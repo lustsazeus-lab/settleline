@@ -23,7 +23,7 @@ Reference technical documentation: `docs/architecture.md`.
 1. Dashboard loads without login or wallet connection.
 2. Compliance notice says the app is a hackathon demo and does not enable real-money wagering.
 3. The dashboard shows two demo markets.
-4. The dashboard shows a `Judge API` panel with health, settle, verify, and signals endpoints.
+4. The dashboard shows a `Judge API` panel with health, settle, verify, attest, and signals endpoints.
 5. The dashboard shows `LineSignal` cards for the Trading Tools and Agents track:
    - workflow status `settlement-ready`,
    - risk level `medium`,
@@ -50,6 +50,7 @@ curl -s http://127.0.0.1:3027/api/fixtures
 curl -s http://127.0.0.1:3027/api/signals
 curl -s -X POST http://127.0.0.1:3027/api/markets/market-wc-001-winner/settle
 curl -s -X POST http://127.0.0.1:3027/api/markets/market-wc-001-winner/verify
+curl -s -X POST http://127.0.0.1:3027/api/markets/market-wc-001-winner/attest
 ```
 
 Expected health status:
@@ -82,6 +83,13 @@ Expected verification status:
 "valid":true
 ```
 
+Expected devnet attestation status:
+
+```text
+"network":"solana-devnet"
+"mode":"dry-run"
+```
+
 Expected signal status:
 
 ```text
@@ -106,9 +114,9 @@ Expected:
 - no audit vulnerabilities at moderate level or higher,
 - TypeScript exits cleanly,
 - Vitest tests pass,
-- Next build includes `/`, `/signals`, `/market/[marketId]`, `/api/health`, `/api/fixtures`, `/api/signals`, `/api/markets/[marketId]/settle`, and `/api/markets/[marketId]/verify`.
-- submission verifier prints `PASS health`, `PASS settlement`, `PASS verification`, and `PASS signals`.
-- evidence bundle prints health, receipt, mock escrow release, receipt hash, verification checks, LineSignal output, and copyable judge commands as JSON.
+- Next build includes `/`, `/signals`, `/market/[marketId]`, `/api/health`, `/api/fixtures`, `/api/signals`, `/api/markets/[marketId]/settle`, `/api/markets/[marketId]/verify`, and `/api/markets/[marketId]/attest`.
+- submission verifier prints `PASS health`, `PASS settlement`, `PASS verification`, `PASS attestation`, and `PASS signals`.
+- evidence bundle prints health, receipt, mock escrow release, receipt hash, verification checks, devnet attestation draft, LineSignal output, and copyable judge commands as JSON.
 - readiness packet prints copyable submission fields and marks local-only public gates as incomplete.
 - public GitHub repo runs the same audit, typecheck, test, and build steps via `.github/workflows/ci.yml`.
 

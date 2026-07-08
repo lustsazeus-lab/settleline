@@ -39,6 +39,18 @@ describe("verifySubmissionTarget", () => {
         return jsonResponse({ verification: { valid: true } });
       }
 
+      if (url.endsWith("/api/markets/market-wc-001-winner/attest")) {
+        return jsonResponse({
+          attestation: {
+            mode: "dry-run",
+            network: "solana-devnet",
+            cluster: "devnet",
+            memo: "SettleLine|receipt=sha256:fefd6fe3b135e57fca6106a779dba7bc69840324e79d9a4226cf22ee286f5072|market=market-wc-001-winner|event=txline-replay-event-001|slot=392100001",
+            safeguards: ["devnet-only", "no-user-wallet", "no-custody", "no-real-money-wagering"],
+          },
+        });
+      }
+
       if (url.endsWith("/api/fan-pulse")) {
         return jsonResponse({
           track: "Consumer and Fan Experiences",
@@ -67,6 +79,7 @@ describe("verifySubmissionTarget", () => {
         { label: "health", passed: true },
         { label: "settlement", passed: true },
         { label: "verification", passed: true },
+        { label: "attestation", passed: true },
         { label: "fan-pulse", passed: true },
         { label: "signals", passed: true },
       ],
@@ -75,6 +88,7 @@ describe("verifySubmissionTarget", () => {
       { url: "https://settleline.example/api/health", method: "GET" },
       { url: "https://settleline.example/api/markets/market-wc-001-winner/settle", method: "POST" },
       { url: "https://settleline.example/api/markets/market-wc-001-winner/verify", method: "POST" },
+      { url: "https://settleline.example/api/markets/market-wc-001-winner/attest", method: "POST" },
       { url: "https://settleline.example/api/fan-pulse", method: "GET" },
       { url: "https://settleline.example/api/signals", method: "GET" },
     ]);
@@ -107,6 +121,17 @@ describe("verifySubmissionTarget", () => {
         });
       }
 
+      if (url.endsWith("/api/markets/market-wc-001-winner/attest")) {
+        return jsonResponse({
+          attestation: {
+            mode: "dry-run",
+            network: "solana-devnet",
+            memo: "SettleLine|receipt=sha256:fefd6fe3b135e57fca6106a779dba7bc69840324e79d9a4226cf22ee286f5072",
+            safeguards: ["devnet-only", "no-user-wallet", "no-custody", "no-real-money-wagering"],
+          },
+        });
+      }
+
       if (url.endsWith("/api/signals")) {
         return jsonResponse({
           track: "Trading Tools and Agents",
@@ -123,6 +148,7 @@ describe("verifySubmissionTarget", () => {
         { label: "health", passed: true },
         { label: "settlement", passed: true },
         { label: "verification", passed: false },
+        { label: "attestation", passed: true },
         { label: "fan-pulse", passed: true },
         { label: "signals", passed: true },
       ],
@@ -144,6 +170,20 @@ describe("verifySubmissionTarget", () => {
             receipt: {
               receiptHash: "sha256:fefd6fe3b135e57fca6106a779dba7bc69840324e79d9a4226cf22ee286f5072",
               outcome: { winningSelection: "ARG" },
+            },
+          }),
+        );
+        return;
+      }
+
+      if (request.url === "/api/markets/market-wc-001-winner/attest") {
+        response.end(
+          JSON.stringify({
+            attestation: {
+              mode: "dry-run",
+              network: "solana-devnet",
+              memo: "SettleLine|receipt=sha256:fefd6fe3b135e57fca6106a779dba7bc69840324e79d9a4226cf22ee286f5072",
+              safeguards: ["devnet-only", "no-user-wallet", "no-custody", "no-real-money-wagering"],
             },
           }),
         );
@@ -190,6 +230,7 @@ describe("verifySubmissionTarget", () => {
       expect(stdout).toContain("PASS health");
       expect(stdout).toContain("PASS settlement");
       expect(stdout).toContain("PASS verification");
+      expect(stdout).toContain("PASS attestation");
       expect(stdout).toContain("PASS fan-pulse");
       expect(stdout).toContain("PASS signals");
     } finally {

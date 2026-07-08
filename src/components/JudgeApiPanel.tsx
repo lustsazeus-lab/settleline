@@ -15,6 +15,11 @@ const judgeEndpoints = [
     signal: "valid: true",
   },
   {
+    method: "POST",
+    path: "/api/markets/market-wc-001-winner/attest",
+    signal: "network: solana-devnet",
+  },
+  {
     method: "GET",
     path: "/api/fan-pulse",
     signal: "track: Consumer and Fan Experiences",

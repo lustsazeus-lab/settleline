@@ -64,6 +64,8 @@ export function formatSubmissionReadinessMarkdown(packet) {
     `Mock escrow: ${packet.evidence.mockEscrow.escrowId}`,
     `Mock escrow asset: ${packet.evidence.mockEscrow.asset}`,
     `Verification valid: ${packet.evidence.verification.valid}`,
+    `Devnet attestation: ${packet.evidence.attestation?.network ?? "n/a"} / ${packet.evidence.attestation?.mode ?? "n/a"}`,
+    `Attestation memo: ${packet.evidence.attestation?.memo ?? "n/a"}`,
     `Trading signals: ${packet.evidence.signals?.signals?.length ?? 0} / track=${packet.evidence.signals?.track ?? "n/a"}`,
     "",
     "Judge commands:",

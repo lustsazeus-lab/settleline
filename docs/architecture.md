@@ -6,8 +6,8 @@ SettleLine is a replay-first TxODDS hackathon MVP for verifiable prediction-mark
 
 - Mode: TxLINE-shaped replay data.
 - Access: no login, no wallet, no payment.
-- Scope: deterministic settlement and receipt verification.
-- Chain context: Solana devnet metadata only.
+- Scope: deterministic settlement, receipt verification, and devnet attestation drafts.
+- Chain context: Solana devnet metadata and memo-attestation payloads only.
 - Production betting: intentionally out of scope.
 
 ## Data Flow
@@ -17,6 +17,7 @@ TxLINE-shaped replay event
   -> fixture and market lookup
   -> deterministic settlement rule
   -> proof receipt
+  -> devnet attestation memo draft
   -> FanPulse consumer story, Hi-Lo game, and sweepstake leaderboard
   -> LineSignal readiness and risk summary
   -> replay-only mock escrow release
@@ -33,6 +34,7 @@ Core files:
 - `src/domain/signals.ts`: trading-agent signal builder for settlement readiness, confidence, proof slot, and risk reasons.
 - `src/domain/escrow.ts`: deterministic replay-only mock escrow release mapping.
 - `src/domain/proofs.ts`: receipt construction, stable SHA-256 hash, and verification checks.
+- `src/domain/devnet-attestation.ts`: Solana devnet memo payload and explorer URL helpers.
 - `src/integrations/txline/replay-adapter.ts`: adapter used by pages and API routes.
 - `src/integrations/txline/http-adapter.ts`: guarded placeholder for future live TxLINE activation.
 
@@ -77,6 +79,23 @@ The receipt hash is a `sha256:` digest over a stable, sorted JSON representation
 - safeguards: `replay-only`, `no-custody`, and `no-real-money-wagering`.
 
 This is an accounting proof for judges, not a live payment rail. It shows the exact point where a compliant devnet or production escrow program would release funds after receipt verification succeeds.
+
+## Devnet Attestation Draft
+
+`buildDevnetAttestationDraft` maps a proof receipt to a Solana devnet memo payload:
+
+- `network`: `solana-devnet`,
+- `instruction`: `memo-attest-receipt-hash`,
+- `memo`: `SettleLine|receipt=<hash>|market=<market>|event=<event>|slot=<slot>`,
+- safeguards: `devnet-only`, `no-user-wallet`, `no-custody`, and `no-real-money-wagering`.
+
+The review endpoint is:
+
+```bash
+curl -s -X POST http://127.0.0.1:3027/api/markets/market-wc-001-winner/attest
+```
+
+The endpoint is dry-run by default. It does not submit a transaction, expose a private key, or claim mainnet settlement.
 
 ## Verification Checks
 
@@ -144,6 +163,7 @@ GET  /api/fan-pulse
 GET  /api/signals
 POST /api/markets/[marketId]/settle
 POST /api/markets/[marketId]/verify
+POST /api/markets/[marketId]/attest
 ```
 
 Use the submission verifier for an end-to-end check:
@@ -159,11 +179,12 @@ Expected output:
 PASS health
 PASS settlement
 PASS verification
+PASS attestation
 PASS fan-pulse
 PASS signals
 ```
 
-The evidence bundle also includes the proof receipt, mock escrow release JSON, FanPulse payload, and LineSignal output.
+The evidence bundle also includes the proof receipt, mock escrow release JSON, devnet attestation draft, FanPulse payload, and LineSignal output.
 
 ## Live TxLINE Extension Path
 

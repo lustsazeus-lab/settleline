@@ -22,6 +22,15 @@ const evidence = {
     winningSelection: "ARG",
   },
   verification: { valid: true, checks: [{ label: "Receipt hash", passed: true }] },
+  attestation: {
+    mode: "dry-run",
+    network: "solana-devnet",
+    cluster: "devnet",
+    memo:
+      "SettleLine|receipt=sha256:fefd6fe3b135e57fca6106a779dba7bc69840324e79d9a4226cf22ee286f5072|market=market-wc-001-winner|event=txline-replay-event-001|slot=392100001",
+    transactionSignature: null,
+    transactionExplorerUrl: null,
+  },
   signals: {
     track: "Trading Tools and Agents",
     signals: [{ marketId: "market-wc-001-winner", workflowStatus: "settlement-ready", riskLevel: "medium" }],
@@ -94,6 +103,8 @@ describe("formatSubmissionReadinessMarkdown", () => {
     expect(markdown).toContain("Public MVP ready: no");
     expect(markdown).toContain("Repository: https://github.com/example/settleline");
     expect(markdown).toContain("Receipt hash: sha256:fefd6fe3b135e57fca6106a779dba7bc69840324e79d9a4226cf22ee286f5072");
+    expect(markdown).toContain("Devnet attestation: solana-devnet / dry-run");
+    expect(markdown).toContain("Attestation memo: SettleLine|receipt=sha256:");
     expect(markdown).toContain("Trading signals: 1 / track=Trading Tools and Agents");
     expect(markdown).toContain("Mock escrow: mock-escrow-market-wc-001-winner-txline-replay-event-001");
     expect(markdown).toContain("- [ ] Public HTTPS MVP");

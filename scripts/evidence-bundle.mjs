@@ -9,10 +9,11 @@ export async function buildEvidenceBundle(
   { fetcher = fetch, now = () => new Date().toISOString(), marketId = DEFAULT_MARKET_ID } = {},
 ) {
   const origin = normalizeBaseUrl(baseUrl);
-  const [health, settlement, verification, fanPulse, signals] = await Promise.all([
+  const [health, settlement, verification, attestation, fanPulse, signals] = await Promise.all([
     readJson(fetcher(`${origin}/api/health`)),
     readJson(fetcher(`${origin}/api/markets/${marketId}/settle`, { method: "POST" })),
     readJson(fetcher(`${origin}/api/markets/${marketId}/verify`, { method: "POST" })),
+    readJson(fetcher(`${origin}/api/markets/${marketId}/attest`, { method: "POST" })),
     readJson(fetcher(`${origin}/api/fan-pulse`)),
     readJson(fetcher(`${origin}/api/signals`)),
   ]);
@@ -25,12 +26,14 @@ export async function buildEvidenceBundle(
     receipt: settlement.receipt,
     mockEscrow: settlement.mockEscrow,
     verification: verification.verification,
+    attestation: attestation.attestation,
     fanPulse,
     signals,
     judgeCommands: [
       `curl -s ${origin}/api/health`,
       `curl -s -X POST ${origin}/api/markets/${marketId}/settle`,
       `curl -s -X POST ${origin}/api/markets/${marketId}/verify`,
+      `curl -s -X POST ${origin}/api/markets/${marketId}/attest`,
       `curl -s ${origin}/api/fan-pulse`,
       `curl -s ${origin}/api/signals`,
       `npm run verify:submission -- ${origin}`,

@@ -52,6 +52,22 @@ describe("buildEvidenceBundle", () => {
         });
       }
 
+      if (url.endsWith("/api/markets/market-wc-001-winner/attest")) {
+        return jsonResponse({
+          attestation: {
+            mode: "dry-run",
+            network: "solana-devnet",
+            cluster: "devnet",
+            instruction: "memo-attest-receipt-hash",
+            memo:
+              "SettleLine|receipt=sha256:fefd6fe3b135e57fca6106a779dba7bc69840324e79d9a4226cf22ee286f5072|market=market-wc-001-winner|event=txline-replay-event-001|slot=392100001",
+            transactionSignature: null,
+            transactionExplorerUrl: null,
+            safeguards: ["devnet-only", "no-user-wallet", "no-custody", "no-real-money-wagering"],
+          },
+        });
+      }
+
       if (url.endsWith("/api/fan-pulse")) {
         return jsonResponse({
           track: "Consumer and Fan Experiences",
@@ -106,6 +122,17 @@ describe("buildEvidenceBundle", () => {
           { label: "Receipt hash", passed: true },
         ],
       },
+      attestation: {
+        mode: "dry-run",
+        network: "solana-devnet",
+        cluster: "devnet",
+        instruction: "memo-attest-receipt-hash",
+        memo:
+          "SettleLine|receipt=sha256:fefd6fe3b135e57fca6106a779dba7bc69840324e79d9a4226cf22ee286f5072|market=market-wc-001-winner|event=txline-replay-event-001|slot=392100001",
+        transactionSignature: null,
+        transactionExplorerUrl: null,
+        safeguards: ["devnet-only", "no-user-wallet", "no-custody", "no-real-money-wagering"],
+      },
       fanPulse: {
         track: "Consumer and Fan Experiences",
         fanPulse: {
@@ -124,6 +151,7 @@ describe("buildEvidenceBundle", () => {
         "curl -s https://settleline.example/api/health",
         "curl -s -X POST https://settleline.example/api/markets/market-wc-001-winner/settle",
         "curl -s -X POST https://settleline.example/api/markets/market-wc-001-winner/verify",
+        "curl -s -X POST https://settleline.example/api/markets/market-wc-001-winner/attest",
         "curl -s https://settleline.example/api/fan-pulse",
         "curl -s https://settleline.example/api/signals",
         "npm run verify:submission -- https://settleline.example",
@@ -134,6 +162,7 @@ describe("buildEvidenceBundle", () => {
       { url: "https://settleline.example/api/health", method: "GET" },
       { url: "https://settleline.example/api/markets/market-wc-001-winner/settle", method: "POST" },
       { url: "https://settleline.example/api/markets/market-wc-001-winner/verify", method: "POST" },
+      { url: "https://settleline.example/api/markets/market-wc-001-winner/attest", method: "POST" },
       { url: "https://settleline.example/api/fan-pulse", method: "GET" },
       { url: "https://settleline.example/api/signals", method: "GET" },
     ]);
