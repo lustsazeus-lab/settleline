@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   buildDevnetAttestationDraft,
   buildDevnetReceiptMemo,
+  buildSubmittedDevnetAttestation,
   buildSolanaExplorerTxUrl,
 } from "../src/domain/devnet-attestation";
 import type { ProofReceipt } from "../src/domain/types";
@@ -66,6 +67,17 @@ describe("buildDevnetAttestationDraft", () => {
       transactionSignature: null,
       transactionExplorerUrl: null,
       safeguards: ["devnet-only", "no-user-wallet", "no-custody", "no-real-money-wagering"],
+    });
+  });
+});
+
+describe("buildSubmittedDevnetAttestation", () => {
+  it("adds a public devnet transaction signature and explorer URL without wallet secrets", () => {
+    expect(buildSubmittedDevnetAttestation(receipt, "abc123")).toEqual({
+      ...buildDevnetAttestationDraft(receipt),
+      mode: "submitted",
+      transactionSignature: "abc123",
+      transactionExplorerUrl: "https://explorer.solana.com/tx/abc123?cluster=devnet",
     });
   });
 });

@@ -10,3 +10,4 @@ output/
 .vercel
 .codegraph/
 .playwright-cli/
+.settleline-devnet-keypair.json

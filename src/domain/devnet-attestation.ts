@@ -1,7 +1,7 @@
 import type { ProofReceipt } from "./types";
 
 export type DevnetAttestationDraft = {
-  mode: "dry-run";
+  mode: "dry-run" | "submitted";
   network: "solana-devnet";
   cluster: "devnet";
   instruction: "memo-attest-receipt-hash";
@@ -13,8 +13,8 @@ export type DevnetAttestationDraft = {
   proofSlot: number;
   proofProgramId: string;
   memo: string;
-  transactionSignature: null;
-  transactionExplorerUrl: null;
+  transactionSignature: string | null;
+  transactionExplorerUrl: string | null;
   safeguards: Array<"devnet-only" | "no-user-wallet" | "no-custody" | "no-real-money-wagering">;
 };
 
@@ -55,5 +55,14 @@ export function buildDevnetAttestationDraft(receipt: ProofReceipt): DevnetAttest
     transactionSignature: null,
     transactionExplorerUrl: null,
     safeguards: ["devnet-only", "no-user-wallet", "no-custody", "no-real-money-wagering"],
+  };
+}
+
+export function buildSubmittedDevnetAttestation(receipt: ProofReceipt, signature: string): DevnetAttestationDraft {
+  return {
+    ...buildDevnetAttestationDraft(receipt),
+    mode: "submitted",
+    transactionSignature: signature.trim(),
+    transactionExplorerUrl: buildSolanaExplorerTxUrl(signature),
   };
 }
